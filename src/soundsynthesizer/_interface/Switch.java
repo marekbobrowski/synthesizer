@@ -19,7 +19,7 @@ public class Switch implements ClickableElement {
     private int lastClicked;
 
     public Switch(double x, double y, double diameter,
-                  int numberOfStates, double distance, String[] names,
+                  int numberOfStates, double distance, String[] names, int[] values,
                   IntGetter parameterGetter, IntSetter parameterSetter) {
         switchPoints = new SwitchPoint[numberOfStates];
         this.parameterGetter = parameterGetter;
@@ -28,17 +28,17 @@ public class Switch implements ClickableElement {
         for (int i = 0; i < this.switchPoints.length; i++) {
             if (i == 0) {
                 switchPoints[i] = new SwitchPoint(x, y, diameter,
-                        diameter, names[i]);
+                        diameter, names[i], values[i]);
             } else {
                 switchPoints[i] = new SwitchPoint(x, y+distance*i,
-                        diameter, diameter, names[i]);
+                        diameter, diameter, names[i], values[i]);
             }
         }
     }
 
     public void draw(Graphics2D graphics2D) {
         for (int i = 0; i < switchPoints.length; i++) {
-            if (i == parameterGetter.get()) {
+            if (switchPoints[i].value == parameterGetter.get()) {
                 graphics2D.setColor(ACTIVE_COLOR);
             } else {
                 graphics2D.setColor(INACTIVE_COLOR);
@@ -51,7 +51,7 @@ public class Switch implements ClickableElement {
 
     @Override
     public void handleClicking() {
-        parameterSetter.set(lastClicked);
+        parameterSetter.set(switchPoints[lastClicked].value);
     }
 
     @Override
@@ -80,10 +80,13 @@ public class Switch implements ClickableElement {
 
     private static class SwitchPoint extends Ellipse2D.Double {
         private final String name;
+        private final int value;
         public SwitchPoint(double x, double y,
-                           double w, double h, String name) {
+                           double w, double h, String name,
+                           int value) {
             super(x, y, w, h);
             this.name = name;
+            this.value = value;
         }
     }
 

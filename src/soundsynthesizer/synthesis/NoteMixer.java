@@ -4,15 +4,13 @@ package soundsynthesizer.synthesis;
  * @author Marek Bobrowski
  */
 public class NoteMixer {
-
     public NoteMixer() {
     }
 
-    public double[][] mixAndNormalizeAllNotes(double[][][] arraysOfSamples) {
-        int numberOfSamples = Converter.BUFFER_SIZE;
-        double[][] mixedSamples = new double[2][numberOfSamples];
+    public double[][] mixAndNormalizeAllNotes(double[][][] arraysOfSamples, int bufferSize) {
+        double[][] mixedSamples = new double[2][bufferSize];
 
-        for (int i = 0; i < numberOfSamples; i++) {
+        for (int i = 0; i < bufferSize; i++) {
             double sumLeft = 0;
             double sumRight = 0;
 

@@ -14,9 +14,9 @@ public class DelayPanel extends Panel {
         DoubleGetter getMix = delay::getMix;
         DoubleSetter setMix = delay::setMix;
         clickableElements.add(new Knob(x,y,30,"fdb","Delay feedback",
-                0,0.99, getFeedback, setFeedback));
+                0,0.99, 0.01, getFeedback, setFeedback));
         clickableElements.add(new Knob(x+60,y,30,"d/w","Delay dry/wet",
-                0,1, getMix, setMix));
+                0,1, 0.01, getMix, setMix));
 
     }
 }

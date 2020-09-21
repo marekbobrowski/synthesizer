@@ -24,6 +24,7 @@ public class Knob extends Ellipse2D.Double implements ClickableElement {
     private final double min;
     private final double max;
     private final DoubleSetter parameterSetter;
+    private final double accuracy;
 
     private double value;
     private double clickedY;
@@ -31,8 +32,8 @@ public class Knob extends Ellipse2D.Double implements ClickableElement {
     private int lastAngle;
     private AffineTransform affineTransform;
 
-    public Knob(double x, double y, double diameter,
-                String shortName, String fullName, double min, double max,
+    public Knob(double x, double y, double diameter, String shortName,
+                String fullName, double min, double max, double accuracy,
                 DoubleGetter parameterGetter, DoubleSetter parameterSetter) {
         super(x - diameter / 2,y - diameter / 2, diameter, diameter);
         this.diameter = diameter;
@@ -41,6 +42,7 @@ public class Knob extends Ellipse2D.Double implements ClickableElement {
         this.fullName = fullName;
         this.min = min;
         this.max = max;
+        this.accuracy = accuracy;
         this.value = parameterGetter.get();
         affineTransform = new AffineTransform();
         affineTransform = AffineTransform.getRotateInstance(Math.toRadians(this.angle + 30), this.line.getX1(),
@@ -53,7 +55,7 @@ public class Knob extends Ellipse2D.Double implements ClickableElement {
 
     @Override
     public void handleReleasing() {
-        this.lastAngle = this.angle;
+        lastAngle = angle;
     }
 
     @Override
@@ -62,11 +64,15 @@ public class Knob extends Ellipse2D.Double implements ClickableElement {
         angle = change + lastAngle;
         if (angle <= 0) {
             angle = 0;
-        }
-        if (angle >= 300) {
+        } else if (angle >= 300) {
             angle = 300;
         }
         value = (((double)angle / 300) * (max - min) + min);
+        double remainder = value % accuracy;
+        value = value - remainder;
+        if (remainder != 0) {
+            updateAngle();
+        }
         parameterSetter.set(value);
         updateRotation();
     }
@@ -74,6 +80,10 @@ public class Knob extends Ellipse2D.Double implements ClickableElement {
     private void updateRotation() {
         this.affineTransform = AffineTransform.getRotateInstance(Math.toRadians(this.angle + 30),
                 this.line.getX1(), this.line.getY1());
+    }
+
+    private void updateAngle() {
+        angle = (int)(300 * (value - min) / (max - min));
     }
 
     public int getAngle() {

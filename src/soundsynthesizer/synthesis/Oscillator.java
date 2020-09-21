@@ -14,20 +14,20 @@ public class Oscillator {
         this.phase = 0;
     }
 
-    public double[][] gatherBuffer(double frequency) {
+    public double[][] gatherBuffer(double frequency, int bufferSize) {
         int waveTypeNumber = intGetter.get();
         return switch (waveTypeNumber) {
-            case 1 -> bufferWithTriangle(frequency);
-            case 2 -> bufferWithSawtooth(frequency);
-            case 3 -> bufferWithPulse(frequency);
+            case 1 -> bufferWithTriangle(frequency, bufferSize);
+            case 2 -> bufferWithSawtooth(frequency, bufferSize);
+            case 3 -> bufferWithPulse(frequency, bufferSize);
             /* 0 (default) - sine wave */
-            default -> bufferWithSine(frequency);
+            default -> bufferWithSine(frequency, bufferSize);
         };
     }
 
-    public double[][] bufferWithSine(double frequency) {
-        double[][] buffer = new double[2][Converter.BUFFER_SIZE];
-        for (int i = 0; i < Converter.BUFFER_SIZE; i++) {
+    public double[][] bufferWithSine(double frequency, int bufferSize) {
+        double[][] buffer = new double[2][bufferSize];
+        for (int i = 0; i < bufferSize; i++) {
             buffer[0][i] = Math.sin(this.phase);
             buffer[1][i] = buffer[0][i];
             this.phase += ((2 * Math.PI * frequency) / Converter.SAMPLE_RATE);
@@ -38,9 +38,9 @@ public class Oscillator {
         return buffer;
     }
 
-    public double[][] bufferWithTriangle(double frequency) {
-        double[][] buffer = new double[2][Converter.BUFFER_SIZE];
-        for (int i = 0; i < Converter.BUFFER_SIZE; i++) {
+    public double[][] bufferWithTriangle(double frequency, int bufferSize) {
+        double[][] buffer = new double[2][bufferSize];
+        for (int i = 0; i < bufferSize; i++) {
             if (this.phase < Math.PI) {
                 buffer[0][i] = -1 + (2/Math.PI)*this.phase;
             } else {
@@ -57,9 +57,9 @@ public class Oscillator {
         return buffer;
     }
 
-    public double[][] bufferWithSawtooth(double frequency) {
-        double[][] buffer = new double[2][Converter.BUFFER_SIZE];
-        for (int i = 0; i < Converter.BUFFER_SIZE; i++) {
+    public double[][] bufferWithSawtooth(double frequency, int bufferSize) {
+        double[][] buffer = new double[2][bufferSize];
+        for (int i = 0; i < bufferSize; i++) {
             buffer[0][i] = 1 - (1 / Math.PI * this.phase);
             buffer[1][i] = buffer[0][i];
             this.phase += ((2 * Math.PI * frequency) / Converter.SAMPLE_RATE);
@@ -70,9 +70,9 @@ public class Oscillator {
         return buffer;
     }
 
-    public double[][] bufferWithPulse(double frequency) {
-        double[][] buffer = new double[2][Converter.BUFFER_SIZE];
-        for (int i = 0; i < Converter.BUFFER_SIZE; i++) {
+    public double[][] bufferWithPulse(double frequency, int bufferSize) {
+        double[][] buffer = new double[2][bufferSize];
+        for (int i = 0; i < bufferSize; i++) {
             if (this.phase < Math.PI) {
                 buffer[0][i] = 1;
             } else {

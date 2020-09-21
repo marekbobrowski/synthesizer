@@ -27,7 +27,7 @@ public class Reverb {
     }
 
     public double[][] createProcessedBuffer(double[][] buffer) {
-        double[][] output = new double[2][Converter.BUFFER_SIZE];
+        double[][] output = new double[2][buffer[0].length];
 
         double[][] cf1Samples = cf1.createProcessedBuffer(buffer);
         double[][] cf2Samples = cf2.createProcessedBuffer(buffer);

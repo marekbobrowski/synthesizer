@@ -42,6 +42,9 @@ public class SynthesizerInterface extends JPanel {
         ReverbPanel reverbPanel =
                 new ReverbPanel(synthesizer.getReverb(), 30, 350);
 
+        BufferSizePanel bufferSizePanel =
+                new BufferSizePanel(synthesizer.getConverter(), 30, 450);
+
         DetailPanel detailPanel = new DetailPanel(30, 500, 30, this);
 
         panels.add(oscillatorPanel);
@@ -49,6 +52,7 @@ public class SynthesizerInterface extends JPanel {
         panels.add(delayPanel);
         panels.add(reverbPanel);
         panels.add(detailPanel);
+        panels.add(bufferSizePanel);
     }
 
     @Override

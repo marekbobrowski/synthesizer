@@ -41,19 +41,21 @@ public class Synthesizer implements Runnable {
         notesToBeAdded.clear();
     }
 
-    private double[][][] gatherBuffersFromAllNotes() {
-        double[][][] allNoteBuffers = new double[notes.size()][2][Converter.BUFFER_SIZE];
+    private double[][][] gatherBuffersFromAllNotes(int bufferSize) {
+        double[][][] allNoteBuffers = new double[notes.size()][2][bufferSize];
         int index = 0;
         for(Note n : notes) {
-            if(index >= allNoteBuffers.length) break;
-            allNoteBuffers[index] = n.prepareBuffer();
+            if (index >= allNoteBuffers.length) {
+                break;
+            }
+            allNoteBuffers[index] = n.prepareBuffer(bufferSize);
             index++;
         }
         return allNoteBuffers;
     }
 
-    private void processGatheredNotes(double[][][] allNoteBuffers) {
-        double[][] mixedNotes = noteMixer.mixAndNormalizeAllNotes(allNoteBuffers);
+    private void processGatheredNotes(double[][][] allNoteBuffers, int bufferSize) {
+        double[][] mixedNotes = noteMixer.mixAndNormalizeAllNotes(allNoteBuffers, bufferSize);
         delay.processBuffer(mixedNotes);
         mixedNotes = reverb.createProcessedBuffer(mixedNotes);
         converter.streamBuffer(mixedNotes);
@@ -69,10 +71,11 @@ public class Synthesizer implements Runnable {
         double[][][] allNoteBuffers;
         this.keepBuffering = true;
         while (keepBuffering) {
+            int bufferSize = converter.getBufferSize();
             acceptNewNotes();
             endFinishedNotes();
-            allNoteBuffers = gatherBuffersFromAllNotes();
-            processGatheredNotes(allNoteBuffers);
+            allNoteBuffers = gatherBuffersFromAllNotes(bufferSize);
+            processGatheredNotes(allNoteBuffers, bufferSize);
         }
     }
 
@@ -90,5 +93,9 @@ public class Synthesizer implements Runnable {
 
     public OscillatorSettings getOscillatorSettings() {
         return oscillatorSettings;
+    }
+
+    public Converter getConverter() {
+        return converter;
     }
 }

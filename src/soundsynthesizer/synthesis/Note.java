@@ -26,13 +26,15 @@ public class Note {
         oscillator2 = new Oscillator(wave2);
     }
 
-    public double[][] prepareBuffer() {
+    public double[][] prepareBuffer(int bufferSize) {
         double[][] oscillator1Buffer = oscillator1.gatherBuffer(frequency *
                 Math.pow(2,(oscillatorSettings.getOscillator1SemitonesShift()*100
-                        + oscillatorSettings.getOscillator1CentsShift())/1200.0));
+                        + oscillatorSettings.getOscillator1CentsShift())/1200.0),
+                bufferSize);
         double[][] oscillator2Buffer = oscillator2.gatherBuffer(frequency *
                 Math.pow(2,(oscillatorSettings.getOscillator2SemitonesShift()*100
-                        + oscillatorSettings.getOscillator2CentsShift())/1200.0));
+                        + oscillatorSettings.getOscillator2CentsShift())/1200.0),
+                bufferSize);
         double[][] mixedBuffer = mixOscillators(oscillator1Buffer, oscillator2Buffer);
         amplifierEnvelopeProcessor.processBuffer(mixedBuffer);
         return mixedBuffer;

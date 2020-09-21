@@ -26,18 +26,20 @@ public class OscillatorPanel extends Panel {
         DoubleGetter getMixValue = oscillatorSettings::getMixValue;
         DoubleSetter setMixValue = oscillatorSettings::setMixValue;
         clickableElements.add(new Knob(x,y,30,"semi","Oscillator 1 Semitone Shift",
-                -24,24, getOscillator1SemitonesShift, setOscillator1SemitonesShift));
+                -24,24, 1, getOscillator1SemitonesShift, setOscillator1SemitonesShift));
         clickableElements.add(new Knob(x+60,y,30,"cent","Oscillator 1 Cent Shift",
-                -100,100, getOscillator1CentsShift, setOscillator1CentsShift));
+                -50,50, 1, getOscillator1CentsShift, setOscillator1CentsShift));
         clickableElements.add(new Knob(x+120,y,30,"semi","Oscillator 2 Semitone Shift",
-                -24,24, getOscillator2SemitonesShift, setOscillator2SemitonesShift));
+                -24,24, 1, getOscillator2SemitonesShift, setOscillator2SemitonesShift));
         clickableElements.add(new Knob(x+180,y,30,"cent","Oscillator 2 Cent Shift",
-                -100,100, getOscillator2CentsShift, setOscillator2CentsShift));
+                -50,50, 1, getOscillator2CentsShift, setOscillator2CentsShift));
         clickableElements.add(new Knob(x+240,y,30,"mix","Oscillators mix",
-                0,1, getMixValue, setMixValue));
+                0,1, 0.01, getMixValue, setMixValue));
         clickableElements.add(new Switch(x+300, y, 15, 4, 15,
-                new String[]{"sine","triangle","saw","square"}, getOscillator1Type, setOscillator1Type));
+                new String[] {"sine","triangle","saw","square"}, new int[] {0,1,2,3},
+                getOscillator1Type, setOscillator1Type));
         clickableElements.add(new Switch(x+360, y, 15, 4, 15,
-                new String[]{"sine","triangle","saw","square"}, getOscillator2Type, setOscillator2Type));
+                new String[] {"sine","triangle","saw","square"}, new int[] {0,1,2,3},
+                getOscillator2Type, setOscillator2Type));
     }
 }
