@@ -10,40 +10,43 @@ import java.awt.geom.Ellipse2D;
 /**
  * @author Marek Bobrowski
  */
-public class Switch implements ClickableElement {
+public class RadioButtons implements ClickableElement {
     private static final Color ACTIVE_COLOR = new Color(0.7f, 0.7f, 0.7f);
     private static final Color INACTIVE_COLOR = new Color(0.1f, 0.1f, 0.1f);
-    private final SwitchPoint[] switchPoints;
+    private final Option[] options;
     private final IntGetter parameterGetter;
     private final IntSetter parameterSetter;
     private int lastClicked;
 
-    public Switch(double x, double y, double diameter,
-                  int numberOfStates, double distance, String[] names, int[] values,
-                  IntGetter parameterGetter, IntSetter parameterSetter) {
-        switchPoints = new SwitchPoint[numberOfStates];
+    public RadioButtons(double x, double y, double diameter,
+                        int numberOfStates, double distance, String[] names, int[] values,
+                        IntGetter parameterGetter, IntSetter parameterSetter) {
+        options = new Option[numberOfStates];
         this.parameterGetter = parameterGetter;
         this.parameterSetter = parameterSetter;
 
-        for (int i = 0; i < this.switchPoints.length; i++) {
+        for (int i = 0; i < this.options.length; i++) {
             if (i == 0) {
-                switchPoints[i] = new SwitchPoint(x, y, diameter,
+                options[i] = new Option(x, y, diameter,
                         diameter, names[i], values[i]);
             } else {
-                switchPoints[i] = new SwitchPoint(x, y+distance*i,
+                options[i] = new Option(x, y + distance * i,
                         diameter, diameter, names[i], values[i]);
             }
         }
     }
 
     public void draw(Graphics2D graphics2D) {
-        for (int i = 0; i < switchPoints.length; i++) {
-            if (switchPoints[i].value == parameterGetter.get()) {
+        for (int i = 0; i < options.length; i++) {
+            graphics2D.setColor(ACTIVE_COLOR);
+            graphics2D.drawString(options[i].name, (int)(options[i].x + options[i].getWidth() + 3),
+                    (int)(options[i].y + options[i].getHeight() - 3));
+            if (options[i].value == parameterGetter.get()) {
                 graphics2D.setColor(ACTIVE_COLOR);
             } else {
                 graphics2D.setColor(INACTIVE_COLOR);
             }
-            graphics2D.fill(switchPoints[i]);
+            graphics2D.fill(options[i]);
         }
     }
 
@@ -51,7 +54,7 @@ public class Switch implements ClickableElement {
 
     @Override
     public void handleClicking() {
-        parameterSetter.set(switchPoints[lastClicked].value);
+        parameterSetter.set(options[lastClicked].value);
     }
 
     @Override
@@ -69,8 +72,8 @@ public class Switch implements ClickableElement {
 
     @Override
     public boolean isClicked(Point mouseClick) {
-        for (int i = 0; i < switchPoints.length; i++) {
-            if (switchPoints[i].contains(mouseClick)) {
+        for (int i = 0; i < options.length; i++) {
+            if (options[i].contains(mouseClick)) {
                 lastClicked = i;
                 return true;
             }
@@ -78,12 +81,12 @@ public class Switch implements ClickableElement {
         return false;
     }
 
-    private static class SwitchPoint extends Ellipse2D.Double {
+    private static class Option extends Ellipse2D.Double {
         private final String name;
         private final int value;
-        public SwitchPoint(double x, double y,
-                           double w, double h, String name,
-                           int value) {
+        public Option(double x, double y,
+                      double w, double h, String name,
+                      int value) {
             super(x, y, w, h);
             this.name = name;
             this.value = value;
@@ -91,7 +94,7 @@ public class Switch implements ClickableElement {
     }
 
     public String getClickedName() {
-        return switchPoints[lastClicked].name;
+        return options[lastClicked].name;
     }
 
 }

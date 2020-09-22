@@ -31,19 +31,19 @@ public class SynthesizerInterface extends JPanel {
         addKeyListener(keyActionHandler);
 
         OscillatorPanel oscillatorPanel =
-                new OscillatorPanel(synthesizer.getOscillatorSettings(), 30, 50);
+                new OscillatorPanel(synthesizer.getOscillatorSettings(), 30, 15);
 
         AmplifierEnvelopePanel amplifierEnvelopePanel =
-                new AmplifierEnvelopePanel(synthesizer.getAmplifierEnvelope(), 30, 150);
+                new AmplifierEnvelopePanel(synthesizer.getAmplifierEnvelope(), 330, 45);
 
         DelayPanel delayPanel =
-                new DelayPanel(synthesizer.getDelay(), 30, 250);
+                new DelayPanel(synthesizer.getDelay(), 630, 45);
 
         ReverbPanel reverbPanel =
-                new ReverbPanel(synthesizer.getReverb(), 30, 350);
+                new ReverbPanel(synthesizer.getReverb(), 630, 135);
 
         BufferSizePanel bufferSizePanel =
-                new BufferSizePanel(synthesizer.getConverter(), 30, 450);
+                new BufferSizePanel(synthesizer.getConverter(), 30, 210);
 
         DetailPanel detailPanel = new DetailPanel(30, 500, 30, this);
 

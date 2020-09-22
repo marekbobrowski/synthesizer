@@ -19,11 +19,11 @@ public class AmplifierEnvelopePanel extends Panel {
         DoubleSetter setRelease = amplifierEnvelopeSettings::setRelease;
         clickableElements.add(new Knob(x,y,30,"att","Amplifier Envelope Attack",
                 0,10, 0.01, getAttack, setAttack));
-        clickableElements.add(new Knob(x+60,y,30,"dec","Amplifier Envelope Decay",
+        clickableElements.add(new Knob(x + 60,y,30,"dec","Amplifier Envelope Decay",
                 0,10, 0.01, getDecay, setDecay));
-        clickableElements.add(new Knob(x+120,y,30,"sus","Amplifier Envelope Sustain",
+        clickableElements.add(new Knob(x + 120,y,30,"sus","Amplifier Envelope Sustain",
                 0,1, 0.01, getSustain, setSustain));
-        clickableElements.add(new Knob(x+180,y,30,"rel","Amplifier Envelope Release",
+        clickableElements.add(new Knob(x + 180,y,30,"rel","Amplifier Envelope Release",
                 0,10, 0.01, getRelease, setRelease));
     }
 

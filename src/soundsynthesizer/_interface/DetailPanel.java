@@ -45,8 +45,8 @@ public class DetailPanel extends Panel {
             graphics2D.drawString(String.valueOf((double)(Math.round(clickedKnob.getValue() * 100)) / 100),
                     synthesizerInterface.getParentWindow().getWidth() / 2, (int)y - 20);
         }
-        if (clicked instanceof Switch) {
-            String name = ((Switch)clicked).getClickedName();
+        if (clicked instanceof RadioButtons) {
+            String name = ((RadioButtons)clicked).getClickedName();
             graphics2D.drawString(name, synthesizerInterface.getParentWindow().getWidth() / 2 - name.length() * 5 / 2,
                     (int)y + 20);
         }

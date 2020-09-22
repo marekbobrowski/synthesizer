@@ -38,9 +38,9 @@ public class Converter {
     }
 
     private byte[] doubleToByte(double[][] samplesDouble) {
-        ByteBuffer byteBuffer = ByteBuffer.allocate(samplesDouble[0].length*4);
+        ByteBuffer byteBuffer = ByteBuffer.allocate(samplesDouble[0].length * 4);
         byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
-        for (int i = 0; i<samplesDouble[0].length; i++) {
+        for (int i = 0; i < samplesDouble[0].length; i++) {
             byteBuffer.putShort((short)(samplesDouble[0][i] * (double)Short.MAX_VALUE));
             byteBuffer.putShort((short)(samplesDouble[1][i] * (double)Short.MAX_VALUE));
         }
