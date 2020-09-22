@@ -17,6 +17,7 @@ public class DelayPanel extends Panel {
                 0,0.99, 0.01, getFeedback, setFeedback));
         clickableElements.add(new Knob(x+60,y,30,"d/w","Delay dry/wet",
                 0,1, 0.01, getMix, setMix));
+        labels.add(new Label((int)x + 5, (int)y - 35, "delay fx"));
 
     }
 }

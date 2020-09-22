@@ -13,7 +13,7 @@ import soundsynthesizer.synthesis.Synthesizer;
 public class SynthesizerWindow extends JFrame {
     public SynthesizerWindow(Synthesizer synthesizer) {
         super("A simple Java sound synthesizer");
-        setSize(800,600);
+        setSize(800,400);
         SynthesizerInterface synthesizerInterface = new SynthesizerInterface(synthesizer, this);
         this.setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

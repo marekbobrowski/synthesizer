@@ -25,22 +25,29 @@ public class OscillatorPanel extends Panel {
         DoubleSetter setOscillator2CentsShift = oscillatorSettings::setOscillator2CentsShift;
         DoubleGetter getMixValue = oscillatorSettings::getMixValue;
         DoubleSetter setMixValue = oscillatorSettings::setMixValue;
-        clickableElements.add(new RadioButtons(x, y, 15, 4, 15,
-                new String[] {"sine","triangle","saw","square"}, new int[] {0,1,2,3},
+        clickableElements.add(new RadioButtons("Oscillator 1 waveform", x, y, 15, 4,
+                15, new String[] {"sine","triangle","saw","square"}, new int[] {0,1,2,3},
                 getOscillator1Type, setOscillator1Type));
-        clickableElements.add(new Knob(x + 90, y + 30,30,"semi","Oscillator 1 Semitone Shift",
-                -24,24, 1, getOscillator1SemitonesShift, setOscillator1SemitonesShift));
-        clickableElements.add(new Knob(x + 150, y + 30,30,"cent","Oscillator 1 Cent Shift",
-                -50,50, 1, getOscillator1CentsShift, setOscillator1CentsShift));
-        clickableElements.add(new RadioButtons(x, y + 90, 15, 4, 15,
-                new String[] {"sine","triangle","saw","square"}, new int[] {0,1,2,3},
+        clickableElements.add(new Knob(x + 90, y + 30,30,"semi",
+                "Oscillator 1 semitone Shift", -24,24, 1,
+                getOscillator1SemitonesShift, setOscillator1SemitonesShift));
+        clickableElements.add(new Knob(x + 150, y + 30,30,"cent",
+                "Oscillator 1 cent Shift", -50,50, 1, getOscillator1CentsShift,
+                setOscillator1CentsShift));
+        clickableElements.add(new RadioButtons("Oscillator 2 waveform", x, y + 90, 15,
+                4, 15, new String[] {"sine","triangle","saw","square"}, new int[] {0,1,2,3},
                 getOscillator2Type, setOscillator2Type));
-        clickableElements.add(new Knob(x + 90, y + 120,30,"semi","Oscillator 2 Semitone Shift",
-                -24,24, 1, getOscillator2SemitonesShift, setOscillator2SemitonesShift));
-        clickableElements.add(new Knob(x + 150, y + 120,30,"cent","Oscillator 2 Cent Shift",
-                -50,50, 1, getOscillator2CentsShift, setOscillator2CentsShift));
+        clickableElements.add(new Knob(x + 90, y + 120,30,"semi",
+                "Oscillator 2 semitone shift", -24,24, 1, getOscillator2SemitonesShift,
+                setOscillator2SemitonesShift));
+        clickableElements.add(new Knob(x + 150, y + 120,30,"cent",
+                "Oscillator 2 cent shift", -50,50, 1,
+                getOscillator2CentsShift, setOscillator2CentsShift));
         clickableElements.add(new Knob(x + 210, y + 75,30,"mix","Oscillators mix",
                 0,1, 0.01, getMixValue, setMixValue));
+        labels.add(new Label((int)x, (int)y - 5, "osc1"));
+        labels.add(new Label((int)x, (int)y + 85, "osc2"));
+
 
 
     }

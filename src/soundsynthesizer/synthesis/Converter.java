@@ -14,14 +14,14 @@ import javax.sound.sampled.SourceDataLine;
  */
 public class Converter {
     static final int SAMPLE_RATE = 44100;
-    private int bufferSize = 2048;
+    private int bufferSize = 512;
     private SourceDataLine line;
 
     public Converter() {
         AudioFormat audioFormat = new AudioFormat(SAMPLE_RATE, 16, 2, true, false);
         try {
             line = AudioSystem.getSourceDataLine(audioFormat);
-            line.open(audioFormat, bufferSize);
+            line.open(audioFormat, 2048);
         } catch (LineUnavailableException ex) {
             Logger.getLogger(Converter.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -17,5 +17,6 @@ public class ReverbPanel extends Panel {
                 0.5, 0.99, 0.01, getDecay, setDecay));
         clickableElements.add(new Knob(x+60, y, 30, "d/w", "Reverb dry/wet",
                 0, 1, 0.01, getMix, setMix));
+        labels.add(new Label((int)x + 5, (int)y - 35, "reverb fx"));
     }
 }

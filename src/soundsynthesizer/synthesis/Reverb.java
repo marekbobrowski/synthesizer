@@ -5,7 +5,7 @@ package soundsynthesizer.synthesis;
  */
 public class Reverb {
     private double decay = 0.8;
-    private double mix = 0.5;
+    private double mix = 0;
 
     private final CombFilter cf1 = new CombFilter(0.965, 0.0297);
     private final CombFilter cf2 = new CombFilter(0.951, 0.0371);

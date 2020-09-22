@@ -2,9 +2,8 @@ package soundsynthesizer._interface;
 
 import soundsynthesizer._interface.knobdelegates.IntSetter;
 import soundsynthesizer._interface.knobdelegates.IntGetter;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Point;
+
+import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 /**
@@ -13,14 +12,17 @@ import java.awt.geom.Ellipse2D;
 public class RadioButtons implements ClickableElement {
     private static final Color ACTIVE_COLOR = new Color(0.7f, 0.7f, 0.7f);
     private static final Color INACTIVE_COLOR = new Color(0.1f, 0.1f, 0.1f);
+    private static final Font font = new Font("TimesRoman", Font.PLAIN, 12);
+    private final String name;
     private final Option[] options;
     private final IntGetter parameterGetter;
     private final IntSetter parameterSetter;
     private int lastClicked;
 
-    public RadioButtons(double x, double y, double diameter,
+    public RadioButtons(String name, double x, double y, double diameter,
                         int numberOfStates, double distance, String[] names, int[] values,
                         IntGetter parameterGetter, IntSetter parameterSetter) {
+        this.name = name;
         options = new Option[numberOfStates];
         this.parameterGetter = parameterGetter;
         this.parameterSetter = parameterSetter;
@@ -39,6 +41,7 @@ public class RadioButtons implements ClickableElement {
     public void draw(Graphics2D graphics2D) {
         for (int i = 0; i < options.length; i++) {
             graphics2D.setColor(ACTIVE_COLOR);
+            graphics2D.setFont(font);
             graphics2D.drawString(options[i].name, (int)(options[i].x + options[i].getWidth() + 3),
                     (int)(options[i].y + options[i].getHeight() - 3));
             if (options[i].value == parameterGetter.get()) {
@@ -93,8 +96,11 @@ public class RadioButtons implements ClickableElement {
         }
     }
 
-    public String getClickedName() {
+    public String getClickedOptionName() {
         return options[lastClicked].name;
     }
 
+    public String getName() {
+        return name;
+    }
 }

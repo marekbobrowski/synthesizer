@@ -17,14 +17,15 @@ public class AmplifierEnvelopePanel extends Panel {
         DoubleSetter setSustain = amplifierEnvelopeSettings::setSustain;
         DoubleGetter getRelease = amplifierEnvelopeSettings::getRelease;
         DoubleSetter setRelease = amplifierEnvelopeSettings::setRelease;
-        clickableElements.add(new Knob(x,y,30,"att","Amplifier Envelope Attack",
+        clickableElements.add(new Knob(x,y,30,"att","Amplifier envelope attack",
                 0,10, 0.01, getAttack, setAttack));
-        clickableElements.add(new Knob(x + 60,y,30,"dec","Amplifier Envelope Decay",
+        clickableElements.add(new Knob(x + 60,y,30,"dec","Amplifier envelope decay",
                 0,10, 0.01, getDecay, setDecay));
-        clickableElements.add(new Knob(x + 120,y,30,"sus","Amplifier Envelope Sustain",
+        clickableElements.add(new Knob(x + 120,y,30,"sus","Amplifier envelope sustain",
                 0,1, 0.01, getSustain, setSustain));
-        clickableElements.add(new Knob(x + 180,y,30,"rel","Amplifier Envelope Release",
+        clickableElements.add(new Knob(x + 180,y,30,"rel","Amplifier envelope release",
                 0,10, 0.01, getRelease, setRelease));
+        labels.add(new Label((int)x + 40, (int)y - 35, "amp envelope"));
     }
 
 }

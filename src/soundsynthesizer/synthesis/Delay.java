@@ -8,7 +8,7 @@ public class Delay {
     private double time = 1;
     private double[] delayBuffer;
     private int delayPosition = 0;
-    private double mix = 0.5;
+    private double mix = 0;
 
     public Delay() {
         delayBuffer = new double[(int)(time*Converter.SAMPLE_RATE)];

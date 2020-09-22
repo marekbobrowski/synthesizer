@@ -2,10 +2,8 @@ package soundsynthesizer._interface;
 
 import soundsynthesizer._interface.knobdelegates.DoubleSetter;
 import soundsynthesizer._interface.knobdelegates.DoubleGetter;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Point;
+
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
@@ -16,6 +14,7 @@ import java.awt.geom.Line2D;
 public class Knob extends Ellipse2D.Double implements ClickableElement {
     private static final Color ELLIPSE_COLOR = new Color(0.1f, 0.1f, 0.1f);
     private static final Color INDICATOR_COLOR = new Color(0.7f, 0.7f, 0.7f);
+    private static final Font font = new Font("TimesRoman", Font.PLAIN, 12);
 
     private final double diameter;
     private final Line2D.Double line;
@@ -117,6 +116,7 @@ public class Knob extends Ellipse2D.Double implements ClickableElement {
         graphics2D.setStroke(new BasicStroke(3));
         graphics2D.draw(affineTransform.createTransformedShape(line));
         graphics2D.setColor(INDICATOR_COLOR);
+        graphics2D.setFont(font);
         graphics2D.drawString(shortName, (int)x, (int)y);
     }
 
