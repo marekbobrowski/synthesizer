@@ -3,7 +3,21 @@ package soundsynthesizer._interface;
 import soundsynthesizer.delegates.IntGetter;
 import soundsynthesizer.delegates.IntSetter;
 import soundsynthesizer.synthesis.Converter;
+
+/**
+ * This class works as a panel for controlling the sound buffer size of assigned {@link Converter} object.
+ *
+ * @author Marek Bobrowski
+ */
 public class BufferSizePanel extends Panel {
+
+    /**
+     * Creates radio buttons used for selecting the desired buffer size.
+     *
+     * @param converter this converter's buffer size will be controlled by this panel
+     * @param x The X coordinate of this panel.
+     * @param y The Y coordinate of this panel.
+     */
     public BufferSizePanel(Converter converter, double x, double y) {
         IntSetter setBufferSize = converter::setBufferSize;
         IntGetter getBufferSize = converter::getBufferSize;
