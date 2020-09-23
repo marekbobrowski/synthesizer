@@ -1,7 +1,7 @@
 package soundsynthesizer._interface;
 
-import soundsynthesizer._interface.knobdelegates.IntGetter;
-import soundsynthesizer._interface.knobdelegates.IntSetter;
+import soundsynthesizer.delegates.IntGetter;
+import soundsynthesizer.delegates.IntSetter;
 import soundsynthesizer.synthesis.Converter;
 public class BufferSizePanel extends Panel {
     public BufferSizePanel(Converter converter, double x, double y) {

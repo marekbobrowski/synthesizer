@@ -1,6 +1,6 @@
 package soundsynthesizer.synthesis;
 
-import soundsynthesizer._interface.knobdelegates.IntGetter;
+import soundsynthesizer.delegates.IntGetter;
 
 /**
  * @author Marek Bobrowski

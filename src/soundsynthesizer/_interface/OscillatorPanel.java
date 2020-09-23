@@ -1,9 +1,9 @@
 package soundsynthesizer._interface;
 
-import soundsynthesizer._interface.knobdelegates.IntGetter;
-import soundsynthesizer._interface.knobdelegates.DoubleSetter;
-import soundsynthesizer._interface.knobdelegates.IntSetter;
-import soundsynthesizer._interface.knobdelegates.DoubleGetter;
+import soundsynthesizer.delegates.IntGetter;
+import soundsynthesizer.delegates.DoubleSetter;
+import soundsynthesizer.delegates.IntSetter;
+import soundsynthesizer.delegates.DoubleGetter;
 import soundsynthesizer.synthesis.OscillatorSettings;
 
 /**

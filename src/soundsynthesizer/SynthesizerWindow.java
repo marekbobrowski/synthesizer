@@ -8,9 +8,20 @@ import javax.swing.JFrame;
 import soundsynthesizer.synthesis.Synthesizer;
 
 /**
+ * This class works as a window for interface of a synthesizer.
+ *
  * @author Marek Bobrowski
  */
 public class SynthesizerWindow extends JFrame {
+
+    /**
+     * Sets up all basic parameters of the window, like it's dimensions, title or method called on closing.
+     * Creates an object of {@link SynthesizerInterface} and attaches it to itself (so the interface is displayed
+     * in this window).
+     *
+     * @param synthesizer the synthesizer instance that is going to be controlled
+     *                    through this window
+     */
     public SynthesizerWindow(Synthesizer synthesizer) {
         super("A simple Java sound synthesizer");
         setSize(800,400);

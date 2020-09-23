@@ -1,7 +1,7 @@
 package soundsynthesizer._interface;
 
-import soundsynthesizer._interface.knobdelegates.IntSetter;
-import soundsynthesizer._interface.knobdelegates.IntGetter;
+import soundsynthesizer.delegates.IntSetter;
+import soundsynthesizer.delegates.IntGetter;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;

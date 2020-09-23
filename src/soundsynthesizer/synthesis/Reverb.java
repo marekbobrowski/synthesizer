@@ -4,24 +4,24 @@ package soundsynthesizer.synthesis;
  * @author Marek Bobrowski
  */
 public class Reverb {
-    private double decay = 0.8;
+    private double decay = 0.9;
     private double mix = 0;
 
-    private final CombFilter cf1 = new CombFilter(0.965, 0.0297);
-    private final CombFilter cf2 = new CombFilter(0.951, 0.0371);
-    private final CombFilter cf3 = new CombFilter(0.950, 0.0411);
-    private final CombFilter cf4 = new CombFilter(0.973, 0.0137);
-    private final CombFilter cf5 = new CombFilter(0.983, 0.0237);
-    private final CombFilter cf6 = new CombFilter(0.971, 0.0375);
-    private final CombFilter cf7 = new CombFilter(0.978, 0.0333);
-    private final CombFilter cf8 = new CombFilter(0.969, 0.0354);
+    private final CombFilter cf1 = new CombFilter(decay, 0.0297);
+    private final CombFilter cf2 = new CombFilter(decay, 0.0371);
+    private final CombFilter cf3 = new CombFilter(decay, 0.0411);
+    private final CombFilter cf4 = new CombFilter(decay, 0.0137);
+    private final CombFilter cf5 = new CombFilter(decay, 0.0237);
+    private final CombFilter cf6 = new CombFilter(decay, 0.0375);
+    private final CombFilter cf7 = new CombFilter(decay, 0.0333);
+    private final CombFilter cf8 = new CombFilter(decay, 0.0354);
 
-    private final AllPassFilter apf1 = new AllPassFilter(0.975, 0.005);
-    private final AllPassFilter apf2 = new AllPassFilter(0.961, 0.0117);
-    private final AllPassFilter apf3 = new AllPassFilter(0.951, 0.0217);
-    private final AllPassFilter apf4 = new AllPassFilter(0.914, 0.0162);
-    private final AllPassFilter apf5 = new AllPassFilter(0.971, 0.0213);
-    private final AllPassFilter apf6 = new AllPassFilter(0.918, 0.0158);
+    private final AllPassFilter apf1 = new AllPassFilter(decay, 0.005);
+    private final AllPassFilter apf2 = new AllPassFilter(decay, 0.0117);
+    private final AllPassFilter apf3 = new AllPassFilter(decay, 0.0217);
+    private final AllPassFilter apf4 = new AllPassFilter(decay, 0.0162);
+    private final AllPassFilter apf5 = new AllPassFilter(decay, 0.0213);
+    private final AllPassFilter apf6 = new AllPassFilter(decay, 0.0158);
 
     public Reverb() {
     }

@@ -1,7 +1,7 @@
 package soundsynthesizer._interface;
 
-import soundsynthesizer._interface.knobdelegates.DoubleGetter;
-import soundsynthesizer._interface.knobdelegates.DoubleSetter;
+import soundsynthesizer.delegates.DoubleGetter;
+import soundsynthesizer.delegates.DoubleSetter;
 import soundsynthesizer.synthesis.AmplifierEnvelopeSettings;
 
 /**

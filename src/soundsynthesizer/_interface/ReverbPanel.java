@@ -1,7 +1,7 @@
 package soundsynthesizer._interface;
 
-import soundsynthesizer._interface.knobdelegates.DoubleSetter;
-import soundsynthesizer._interface.knobdelegates.DoubleGetter;
+import soundsynthesizer.delegates.DoubleSetter;
+import soundsynthesizer.delegates.DoubleGetter;
 import soundsynthesizer.synthesis.Reverb;
 
 /**
