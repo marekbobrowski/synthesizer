@@ -16,7 +16,7 @@ public class AmplifierEnvelopePanel extends Panel {
      * Creates knobs used for controlling the settings of the assigned amplifier envelope:
      * an attack knob, a decay knob, a sustain knob and a release knob.
      *
-     * @param amplifierEnvelopeSettings these settings will be modified by this panel
+     * @param amplifierEnvelopeSettings These settings will be modified by this panel.
      * @param x The X coordinate of this panel.
      * @param y The Y coordinate of this panel.
      */

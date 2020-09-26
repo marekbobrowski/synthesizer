@@ -7,16 +7,30 @@ import soundsynthesizer.synthesis.Note;
 import soundsynthesizer.synthesis.Synthesizer;
 
 /**
+ * This class is responsible for handling key pressing (starting and ending the notes).
+ *
  * @author Marek Bobrowski
  */
 public class KeyActionHandler extends KeyAdapter {
+    /**
+     * The synthesizer that will play the notes.
+     */
     private final Synthesizer synthesizer;
+
+    /**
+     * A dictionary that stores currently pressed keys (only from those specified in the keyPressed function).
+     */
     private final ConcurrentHashMap<Character, Note> pressedKeysAndTheirNotes = new ConcurrentHashMap<>();
 
     public KeyActionHandler(Synthesizer synthesizer) {
         this.synthesizer = synthesizer;
     }
 
+    /**
+     * Assigns 37 keys to different frequencies. When the user presses a certain key,
+     * then the note of the assigned frequency will be played by the synthesizer.
+     * @param ke Information about the event that occurred.
+     */
     @Override
     public void keyPressed(KeyEvent ke) {
         switch(ke.getKeyChar()) {
@@ -136,10 +150,20 @@ public class KeyActionHandler extends KeyAdapter {
         }
     }
 
+    /**
+     * Calculates the frequency of a note that differs from 440 Hz by the specified amount of semitones.
+     * @param semitones Number of semitones of difference.
+     * @return Frequency of a note that differs from 440 Hz by the specified amount of semitones.
+     */
     private double calculateFrequencyByInterval(int semitones) {
         return 440 * Math.pow(2, semitones/12.0);
     }
 
+    /**
+     * Handles the releasing of a key. Shortly, triggers the release phase of the note that was being played
+     * by the released key.
+     * @param ke Information about the event that occurred.
+     */
     @Override
     public void keyReleased(KeyEvent ke) {
         Character c = ke.getKeyChar();
@@ -151,6 +175,12 @@ public class KeyActionHandler extends KeyAdapter {
         }
     }
 
+
+    /**
+     * Handles the pressing of a key - tells the synthesizer to play a note.
+     * @param c The character of the pressed key.
+     * @param frequency The frequency to be played by the synthesizer.
+     */
     private void handleKeyPressed(Character c, double frequency) {
         if (!this.pressedKeysAndTheirNotes.containsKey(c)) {
             Note newNote = new Note(synthesizer, frequency);

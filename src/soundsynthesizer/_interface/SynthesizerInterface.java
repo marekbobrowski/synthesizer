@@ -45,7 +45,7 @@ public class SynthesizerInterface extends JPanel {
         BufferSizePanel bufferSizePanel =
                 new BufferSizePanel(synthesizer.getConverter(), 30, 210);
 
-        DetailPanel detailPanel = new DetailPanel(30, 300, 30, this);
+        DetailPanel detailPanel = new DetailPanel(30, 300, this);
 
         panels.add(oscillatorPanel);
         panels.add(amplifierEnvelopePanel);

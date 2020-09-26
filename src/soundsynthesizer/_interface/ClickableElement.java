@@ -19,7 +19,7 @@ interface ClickableElement {
     /**
      * Handles the event of mouse being dragged.
      * Assumes that the last click was done on this ClickableElement and now the mouse is being dragged.
-     * @param mouseClick current mouse position
+     * @param mouseClick Current mouse position.
      */
     void handleDragging(Point mouseClick);
 
@@ -32,20 +32,20 @@ interface ClickableElement {
      * Tells if this ClickableElement should do something when being dragged after being clicked.
      * For example, a knob should return true and radio buttons should return false.
      *
-     * @return if this ClickableElement is draggable.
+     * @return If this ClickableElement is draggable.
      */
     boolean isDraggable();
 
     /**
      * Checks whether the mouse clicked on this ClickableElement.
-     * @param mouseClick current mouse position
-     * @return if the mouse clicked on this ClickableElement.
+     * @param mouseClick Current mouse position.
+     * @return If the mouse clicked on this ClickableElement.
      */
     boolean isClicked(Point mouseClick);
 
     /**
      * Draws this ClickableElement.
-     * @param graphics2d object that will perform drawing of this ClickableElement
+     * @param graphics2d Object that will perform drawing of this ClickableElement.
      */
     void draw(Graphics2D graphics2d);
 }
