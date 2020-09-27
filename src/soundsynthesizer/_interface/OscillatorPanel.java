@@ -4,12 +4,23 @@ import soundsynthesizer.delegates.IntGetter;
 import soundsynthesizer.delegates.DoubleSetter;
 import soundsynthesizer.delegates.IntSetter;
 import soundsynthesizer.delegates.DoubleGetter;
+import soundsynthesizer.synthesis.Converter;
 import soundsynthesizer.synthesis.OscillatorSettings;
 
 /**
+ * This class works as a panel for controlling the waveform of the synthesizer oscillators.
+ *
  * @author Marek Bobrowski
  */
 public class OscillatorPanel extends Panel {
+
+    /**
+     * Creates radio buttons used for selecting the oscillator waveforms. Four waveforms for each of 2 oscillators.
+     *
+     * @param oscillatorSettings These settings will be controlled by this panel.
+     * @param x The X coordinate of this panel.
+     * @param y The Y coordinate of this panel.
+     */
     public OscillatorPanel(OscillatorSettings oscillatorSettings, double x, double y) {
         IntGetter getOscillator1Type = oscillatorSettings::getOscillator1Type;
         IntSetter setOscillator1Type = oscillatorSettings::setOscillator1Type;

@@ -11,13 +11,36 @@ import soundsynthesizer.SynthesizerWindow;
 import soundsynthesizer.synthesis.Synthesizer;
 
 /**
+ * This class works as an interface for the assigned synthesizer.
+ * It stores all the sub-interfaces (panels) for each of the synthesizer modules.
+ * For example: a panel for reverb, a panel for oscillators etc.
+ * It's responsible for handling the mouse actions on the interface.
+ * It's responsible for drawing all the sub-interfaces (panels).
+ *
  * @author Marek Bobrowski
  */
 public class SynthesizerInterface extends JPanel {
+    /**
+     * The parent window of this interface.
+     */
     private final SynthesizerWindow parentWindow;
+
+    /**
+     * List of the panels attached to this synthesizer interface.
+     */
     private final ArrayList<Panel> panels = new ArrayList<>();
+
+    /**
+     * The currently clicked element (chosen from all the {@link ClickableElement}s from all the panels attached
+     * to this synthesizer interface). If none is clicked, then this value is null.
+     */
     private ClickableElement clickedElement;
 
+    /**
+     * Sets up all the basic parameters of the interface and creates a panel for each of the synthesizer modules.
+     * @param synthesizer The synthesizer that will be controlled by this interface.
+     * @param parentWindow The parent window of this interface.
+     */
     public SynthesizerInterface(Synthesizer synthesizer, SynthesizerWindow parentWindow) {
         this.parentWindow = parentWindow;
         this.setFocusable(true);
@@ -55,6 +78,10 @@ public class SynthesizerInterface extends JPanel {
         panels.add(bufferSizePanel);
     }
 
+    /**
+     * Draws all the panels attached to this interface.
+     * @param g The object that will perform the drawing.
+     */
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D graphics2d = (Graphics2D) g;
@@ -65,15 +92,31 @@ public class SynthesizerInterface extends JPanel {
         }
     }
 
+    /**
+     * Returns the currently clicked element. If none is clicked, then it will return null.
+     * @return The currently clicked element.
+     */
     public ClickableElement getClickedElement(){
         return clickedElement;
     }
 
+    /**
+     * Returns the parent window object.
+     * @return The parent window object.
+     */
     public SynthesizerWindow getParentWindow() {
         return parentWindow;
     }
 
+    /**
+     * Nested class used for handling the mouse actions on the interface.
+     */
     public class MouseActionHandler extends MouseAdapter {
+
+        /**
+         * Handles the mouse pressing.
+         * @param event The information about the mouse event that occurred.
+         */
         @Override
         public void mousePressed(MouseEvent event) {
             for(Panel m : panels) {
@@ -87,6 +130,10 @@ public class SynthesizerInterface extends JPanel {
             }
         }
 
+        /**
+         * Handles the mouse dragging.
+         * @param event The information about the mouse event that occurred.
+         */
         @Override
         public void mouseDragged(MouseEvent event) {
             if (clickedElement != null && clickedElement.isDraggable()) {
@@ -95,6 +142,10 @@ public class SynthesizerInterface extends JPanel {
             }
         }
 
+        /**
+         * Handles the mouse releasing.
+         * @param event The information about the mouse event that occurred.
+         */
         @Override
         public void mouseReleased(MouseEvent event) {
             if (clickedElement !=null) {
