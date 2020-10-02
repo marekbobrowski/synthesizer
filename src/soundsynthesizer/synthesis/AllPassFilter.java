@@ -25,7 +25,7 @@ public class AllPassFilter {
     private final double[] delayBuffer;
 
     /**
-     * Position at which the delayed samples will be overwritten/accessed.
+     * Position at which the delayed samples from delayBuffer will be overwritten/accessed.
      */
     private int delayPosition = 0;
 
