@@ -40,12 +40,12 @@ public class CombFilter {
     private int delayPosition = 0;
 
     /**
-     * Assigns the gain parameter and creates an array for the delayed samples.
-     * @param gain The gain value for the feedforward.
+     * Assigns the feedback gain parameter and creates an array for the delayed samples.
+     * @param feedback The feedback gain value.
      * @param delayTime Delay time in seconds.
      */
-    public CombFilter(double gain, double delayTime) {
-        this.feedback = gain;
+    public CombFilter(double feedback, double delayTime) {
+        this.feedback = feedback;
         delayBuffer = new double[(int)(delayTime * Converter.SAMPLE_RATE)];
     }
 
@@ -68,7 +68,7 @@ public class CombFilter {
     }
 
     /**
-     * Sets the gain parameter.
+     * Sets the feedback gain parameter.
      * @param feedback The gain value for the feedback.
      */
     public void setFeedback(double feedback) {

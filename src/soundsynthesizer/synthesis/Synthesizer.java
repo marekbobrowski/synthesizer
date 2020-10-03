@@ -12,7 +12,6 @@ public class Synthesizer implements Runnable {
     private final Delay delay = new Delay();
     private final Reverb reverb = new Reverb();
     private final Converter converter = new Converter();
-    private final NoteMixer noteMixer = new NoteMixer();
     private final AmplifierEnvelopeSettings amplifierEnvelopeSettings = new AmplifierEnvelopeSettings();
     private final OscillatorSettings oscillatorSettings = new OscillatorSettings();
 
@@ -55,7 +54,7 @@ public class Synthesizer implements Runnable {
     }
 
     private void processGatheredNotes(double[][][] allNoteBuffers, int bufferSize) {
-        double[][] mixedNotes = noteMixer.mixAndNormalizeAllNotes(allNoteBuffers, bufferSize);
+        double[][] mixedNotes = Note.mixAndNormalizeNotes(allNoteBuffers, bufferSize);
         delay.processBuffer(mixedNotes);
         mixedNotes = reverb.createProcessedBuffer(mixedNotes);
         converter.streamBuffer(mixedNotes);
