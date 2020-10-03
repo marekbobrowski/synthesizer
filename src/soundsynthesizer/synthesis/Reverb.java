@@ -1,12 +1,25 @@
 package soundsynthesizer.synthesis;
 
 /**
+ * This class is responsible for creating a reverberation effect on a passed sound buffer.
+ * The reverberation algorithm is based on Manfred Schroeder's idea for first reverberators because
+ * it consists of a parallel bank of feedback comb filters (8) and a series of all-pass filters (6).
+ * Each of the filters have different delay times and the same decay value (feedback/feedforward gain value).
+ *
  * @author Marek Bobrowski
  */
 public class Reverb {
+    /**
+     * The feedback and the feedforward gain values for all the filters.
+     */
     private double decay = 0.9;
+
+    /**
+     * The mix between the dry (0) and the wet (1) signal.
+     */
     private double mix = 0;
 
+    // Initialization of all comb filters.
     private final CombFilter cf1 = new CombFilter(decay, 0.0297);
     private final CombFilter cf2 = new CombFilter(decay, 0.0371);
     private final CombFilter cf3 = new CombFilter(decay, 0.0411);
@@ -16,6 +29,7 @@ public class Reverb {
     private final CombFilter cf7 = new CombFilter(decay, 0.0333);
     private final CombFilter cf8 = new CombFilter(decay, 0.0354);
 
+    // Initialization of all all-pass filters.
     private final AllPassFilter apf1 = new AllPassFilter(decay, 0.005);
     private final AllPassFilter apf2 = new AllPassFilter(decay, 0.0117);
     private final AllPassFilter apf3 = new AllPassFilter(decay, 0.0217);
@@ -23,9 +37,18 @@ public class Reverb {
     private final AllPassFilter apf5 = new AllPassFilter(decay, 0.0213);
     private final AllPassFilter apf6 = new AllPassFilter(decay, 0.0158);
 
+    /**
+     * Empty constructor.
+     */
     public Reverb() {
     }
 
+    /**
+     * Creates a processed sound buffer by applying reverberation to the passed sound buffer.
+     *
+     * @param buffer The buffer that will be used for creating reverberation.
+     * @return The processed sound buffer with added reverberation.
+     */
     public double[][] createProcessedBuffer(double[][] buffer) {
         double[][] output = new double[2][buffer[0].length];
 
@@ -63,14 +86,26 @@ public class Reverb {
         return output;
     }
 
+    /**
+     * Returns the mix between the dry (0) and the wet (1) signal.
+     * @return The mix between the dry (0) and the wet (1) signal.
+     */
     public double getMix() {
         return mix;
     }
 
+    /**
+     * Sets the mix between the dry (0) and the wet (1) signal.
+     * @param mix The mix between the dry (0) and the wet (1) signal.
+     */
     public void setMix(double mix) {
         this.mix = mix;
     }
 
+    /**
+     * Sets the feedback and the feedforward gain values for all the filters.
+     * @param decay The feedback and the feedforward gain values for all the filters.
+     */
     public void setDecay(double decay) {
         if (decay >= 1) {
             this.decay = 1;
@@ -96,6 +131,10 @@ public class Reverb {
         apf6.setGain(this.decay);
     }
 
+    /**
+     * Returns the feedback and the feedforward gain values for all the filters.
+     * @return The feedback and the feedforward gain values for all the filters.
+     */
     public double getDecay() {
         return decay;
     }
