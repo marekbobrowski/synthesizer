@@ -113,19 +113,19 @@ public class Synthesizer implements Runnable {
     }
 
     /**
-     * Mixes and processes the array of all note sound buffers.
+     * Returns mixed and processed sound of all notes.
      * @param allNoteBuffers The buffers to be mixed and processed.
      * @param bufferSize The number of frames of a sound buffer.
      */
-    private void processAndStreamGatheredNotes(double[][][] allNoteBuffers, int bufferSize) {
+    private double[][] returnProcessedNotes(double[][][] allNoteBuffers, int bufferSize) {
         double[][] mixedNotes = Note.mixAndNormalizeNotes(allNoteBuffers, bufferSize);
         delay.processBuffer(mixedNotes);
         mixedNotes = reverb.createProcessedBuffer(mixedNotes);
-        converter.streamBuffer(mixedNotes);
+        return mixedNotes;
     }
 
     /**
-     * Stops streaming the sound to a sound card.
+     * Stops streaming the sound to the sound card.
      */
     public void finishWork() {
         keepBuffering = false;
@@ -134,10 +134,11 @@ public class Synthesizer implements Runnable {
 
     /**
      * Continuous process of buffering the sound:
-     * 1. Add notes from the "waiting room".
+     * 1. Add notes that have been recently triggered.
      * 2. Remove the notes that ended.
      * 3. Gather the buffers from all the existing notes.
-     * 4. Process the gathered buffers and stream them to a sound card.
+     * 4. Mix and process the gathered buffers.
+     * 5. Send the processed sound to the output.
      */
     @Override
     public void run() {
@@ -148,7 +149,8 @@ public class Synthesizer implements Runnable {
             acceptNewNotes();
             endFinishedNotes();
             allNoteBuffers = gatherBuffersFromAllNotes(bufferSize);
-            processAndStreamGatheredNotes(allNoteBuffers, bufferSize);
+            double[][] processedNotes = returnProcessedNotes(allNoteBuffers, bufferSize);
+            converter.streamBuffer(processedNotes);
         }
     }
 

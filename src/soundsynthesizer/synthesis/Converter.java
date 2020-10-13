@@ -10,7 +10,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
 /**
- * This class is responsible for converting sound buffers and streaming them into a sound card.
+ * This class is responsible for converting sound buffers and streaming them into the sound card.
  * It accepts buffers in the format explained below:
  *
  * The initialization of buffer in such format should look like:
@@ -43,13 +43,13 @@ public class Converter {
     private int bufferSize = 512;
 
     /**
-     * The object responsible for streaming ready buffers into a sound card.
+     * The object responsible for streaming ready buffers into the sound card.
      */
     private SourceDataLine line;
 
     /**
      * Creates a {@link AudioFormat} and a {@link SourceDataLine} objects for streaming the sound buffers
-     * into a sound card.
+     * into the sound card.
      */
     public Converter() {
         AudioFormat audioFormat = new AudioFormat(SAMPLE_RATE, 16, 2, true, false);
@@ -63,8 +63,8 @@ public class Converter {
     }
 
     /**
-     * Streams a buffer of sound into a sound card.
-     * @param buffer The sound buffer to be streamed into a sound card.
+     * Streams a buffer of sound into the sound card.
+     * @param buffer The sound buffer to be streamed into the sound card.
      */
     public void streamBuffer(double[][] buffer) {
         byte[] convertedBuffer = doubleToByte(buffer);
