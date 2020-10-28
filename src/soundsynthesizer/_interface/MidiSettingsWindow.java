@@ -60,6 +60,7 @@ public class MidiSettingsWindow extends JFrame {
                         currentInputDevice = device;
                         currentInputDevice.getTransmitter().setReceiver(midiHandler);
 
+
                         currentInputDevice.open();
                         dispose();
                     } catch (MidiUnavailableException midiUnavailableException) {
@@ -105,9 +106,10 @@ public class MidiSettingsWindow extends JFrame {
         // Update the list in the drop-down menu.
         DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
         comboBoxModel.addAll(names);
+        Object selectedItem = dropDownMenu.getSelectedItem();
         dropDownMenu.setModel(comboBoxModel);
-        if (currentInputDevice != null) {
-            comboBoxModel.setSelectedItem(currentInputDevice.getDeviceInfo());
+        if (selectedItem != null) {
+            dropDownMenu.setSelectedItem(selectedItem);
         }
     }
 
