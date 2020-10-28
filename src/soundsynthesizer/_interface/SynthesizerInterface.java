@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.sound.midi.MidiDevice;
 import javax.swing.JPanel;
 import soundsynthesizer.SynthesizerWindow;
 import soundsynthesizer.synthesis.Synthesizer;
@@ -37,6 +38,12 @@ public class SynthesizerInterface extends JPanel {
     private ClickableElement clickedElement;
 
     /**
+     * The object responsible for handling the MIDI data.
+     */
+    private final MidiHandler midiHandler;
+
+
+    /**
      * Sets up all the basic parameters of the interface and creates a panel for each of the synthesizer modules.
      * @param synthesizer The synthesizer that will be controlled by this interface.
      * @param parentWindow The parent window of this interface.
@@ -46,11 +53,13 @@ public class SynthesizerInterface extends JPanel {
         this.setFocusable(true);
         this.requestFocusInWindow();
 
+        this.midiHandler = new MidiHandler(synthesizer);
+
         MouseActionHandler mouseActionHandler = new MouseActionHandler();
         addMouseListener(mouseActionHandler);
         addMouseMotionListener(mouseActionHandler);
 
-        KeyActionHandler keyActionHandler = new KeyActionHandler(synthesizer);
+        KeyActionHandler keyActionHandler = new KeyActionHandler(midiHandler);
         addKeyListener(keyActionHandler);
 
         OscillatorPanel oscillatorPanel =
@@ -106,6 +115,14 @@ public class SynthesizerInterface extends JPanel {
      */
     public SynthesizerWindow getParentWindow() {
         return parentWindow;
+    }
+
+    /**
+     * Returns the object responsible for handling the MIDI data.
+     * @return The object responsible for handling the MIDI data.
+     */
+    public MidiHandler getMidiHandler() {
+        return midiHandler;
     }
 
     /**

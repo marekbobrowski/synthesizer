@@ -35,7 +35,7 @@ public class DetailPanel extends Panel {
     /**
      * The height of the detail bar.
      */
-    private final int barHeight = 30;
+    private final int barHeight = 15;
 
     /**
      * The assigned parent interface. The detailed information of the currently clicked {@link ClickableElement}
