@@ -73,8 +73,10 @@ public class SynthesizerWindow extends JFrame {
         addWindowListener(new WindowAdapter() {
                                    @Override
                                    public void windowClosing(WindowEvent e) {
-                                       midiSettingsWindow.getCurrentInputDevice().close();
-                                       midiSettingsWindow.dispose();
+                                       if (midiSettingsWindow != null) {
+                                           midiSettingsWindow.getCurrentInputDevice().close();
+                                           midiSettingsWindow.dispose();
+                                       }
                                        synthesizer.finishWork();
                                    }
                                });
