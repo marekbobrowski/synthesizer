@@ -50,6 +50,11 @@ public class Synthesizer implements Runnable {
     private final OscillatorSettings oscillatorSettings = new OscillatorSettings();
 
     /**
+     * The output loudness of this synthesizer.
+     */
+    private final Volume volume = new Volume();
+
+    /**
      * Tells if this synthesizer should keep buffering new sound.
      */
     private boolean keepBuffering = false;
@@ -121,6 +126,7 @@ public class Synthesizer implements Runnable {
         double[][] mixedNotes = Note.mixAndNormalizeNotes(allNoteBuffers, bufferSize);
         delay.processBuffer(mixedNotes);
         mixedNotes = reverb.createProcessedBuffer(mixedNotes);
+        volume.processBuffer(mixedNotes);
         return mixedNotes;
     }
 
@@ -192,5 +198,13 @@ public class Synthesizer implements Runnable {
      */
     public Converter getConverter() {
         return converter;
+    }
+
+    /**
+     * Returns the object responsible for controlling the volume of this synthesizer.
+     * @return The object responsible for controlling the volume of this synthesizer.
+     */
+    public Volume getVolume() {
+        return volume;
     }
 }
