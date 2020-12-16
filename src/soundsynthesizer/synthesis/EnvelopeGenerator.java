@@ -1,75 +1,75 @@
 package soundsynthesizer.synthesis;
 
 /**
- * This class processes the sound by applying an amplifier envelope to sound buffers.
- * The processing is applied according to the settings of an {@link AmplifierEnvelopeSettings} object.
- * An instance of such processor should be created for every new note.
+ * This class processes the sound by applying an amplitude envelope to sound buffers.
+ * The processing is applied according to the settings of an {@link EnvelopeSettings} object.
+ * An instance of such processor should be created for every new voice.
  *
  * @author Marek Bobrowski
- * @see AmplifierEnvelopeSettings
+ * @see EnvelopeSettings
  */
-public class AmplifierEnvelopeProcessor {
+public class EnvelopeGenerator {
     /**
-     * The amplifier envelope settings that describe how the sound should be processed by this processor.
+     * The envelope settings that describe how the sound should be processed by this envelope generator.
      */
-    private final AmplifierEnvelopeSettings amplifierEnvelopeSettings;
+    private final EnvelopeSettings envelopeSettings;
 
     /**
-     * The number of the samples that have gone through the attack phase.
+     * The number of the samples that have gone through the attack segment.
      */
     private int attackSampleCount = 0;
 
     /**
-     * The number of the samples that have gone through the decay phase.
+     * The number of the samples that have gone through the decay segment.
      */
     private int decaySampleCount = 0;
 
     /**
-     * The number of the samples that have gone through the release phase.
+     * The number of the samples that have gone through the release segment.
      */
     private int releaseSampleCount = 0;
 
     /**
-     * The number of the samples that have gone through the before-release phases.
+     * The number of the samples that have gone through the before-release segments.
      */
     private int beforeReleaseSampleCount = 0;
 
     /**
-     * The instance of the note that is being processed.
+     * The instance of the voice that is being processed.
      */
-    private final Note note;
+    private final Voice voice;
 
     /**
-     * Last value of the amplifier envelope. Envelope's value is a value that describes how
+     * Last value of the envelope. Envelope's value is a value that describes how
      * the volume of the passing sound is being changed. With every envelope "tick", this value is calculated anew.
-     * For example, for a typical attack phase this value will change incrementally like that: 0 -> 0.01 -> 0.02 etc.
-     * Then, for a release phase it might look like that: 1 -> 0.95 -> 0.9 etc.
+     * For example, for a typical attack segment this value will change incrementally like that: 0 -> 0.01 -> 0.02 etc.
+     * Then, for a release segment it might look like that: 1 -> 0.95 -> 0.9 etc.
      */
     private double lastValue = 0;
 
 
     /**
      * Assigns the passed arguments to the class fields.
-     * @param note This note's volume will be controlled by this processor.
-     * @param amplifierEnvelopeSettings The amplifier envelope settings that describe how the sound
-     *                                  should be processed by this processor.
+     * @param voice This voice's signal amplitude will be controlled by this envelope generator.
+     * @param envelopeSettings The envelope settings that describe how the sound
+     *                                  should be processed by this envelope generator.
      */
-    public AmplifierEnvelopeProcessor(Note note, AmplifierEnvelopeSettings amplifierEnvelopeSettings) {
-        this.note = note;
-        this.amplifierEnvelopeSettings = amplifierEnvelopeSettings;
+    public EnvelopeGenerator(Voice voice, EnvelopeSettings envelopeSettings) {
+        this.voice = voice;
+        this.envelopeSettings = envelopeSettings;
     }
 
     /**
-     * Processes the buffer according to the passed {@link AmplifierEnvelopeSettings} instance.
+     * Processes the buffer according to the passed {@link EnvelopeSettings} instance.
      * @param buffer The buffer to be processed.
      */
     public void processBuffer(double[][] buffer) {
         for (int i = 0; i < buffer[0].length; i++) {
-            int numberOfAttackSamples = timeToSamples(amplifierEnvelopeSettings.getAttack());
-            int numberOfDecaySamples = timeToSamples(amplifierEnvelopeSettings.getDecay());
-            double sustainLevel = amplifierEnvelopeSettings.getSustain();
-            int numberOfReleaseSamples = timeToSamples(amplifierEnvelopeSettings.getRelease());
-            if (!note.isReleased()) {
+            int numberOfAttackSamples = timeToSamples(envelopeSettings.getAttack());
+            int numberOfDecaySamples = timeToSamples(envelopeSettings.getDecay());
+            double sustainLevel = envelopeSettings.getSustain();
+            int numberOfReleaseSamples = timeToSamples(envelopeSettings.getRelease());
+            if (!voice.isReleased()) {
                 if (beforeReleaseSampleCount < numberOfAttackSamples) {
                     lastValue = (1 - lastValue) / (numberOfAttackSamples - attackSampleCount)
                             + lastValue;
@@ -92,8 +92,8 @@ public class AmplifierEnvelopeProcessor {
                             - numberOfReleaseSamples)
                             + lastValue;
                 } else {
-                    if (!note.hasEnded()) {
-                        note.handleEnvelopeEnd();
+                    if (!voice.hasEnded()) {
+                        voice.handleEnvelopeEnd();
                     }
                     lastValue = 0;
                 }

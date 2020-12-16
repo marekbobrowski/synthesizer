@@ -18,14 +18,14 @@ public class Delay {
 
     /**
      * The delay time in seconds.
-     * It describes the time between the original sound, it's first echo and the following echoes.
+     * It describes the time between the echoes.
      */
     private double time = 1;
 
     /**
      * Stores the delayed samples.
      */
-    private double[] delayBuffer;
+    private final double[] delayBuffer;
 
     /**
      * Position at which the delayed samples from delayBuffer will be overwritten/accessed.
@@ -46,7 +46,7 @@ public class Delay {
 
 
     /**
-     * Processes the passed buffer by adding echo to it.
+     * Processes the passed buffer by adding echo effect to it.
      *
      * @param buffer The buffer to be processed.
      */
@@ -108,7 +108,7 @@ public class Delay {
 
     /**
      * Returns the delay time (in seconds).
-     * The delay time describes the time between the original sound, it's first echo and the following echoes.
+     * The delay time describes the time between the echoes.
      * @return The delay time (in seconds).
      */
     public double getTime() {
@@ -117,7 +117,7 @@ public class Delay {
 
     /**
      * Sets the delay time (in seconds).
-     * The delay time describes the time between the original sound, it's first echo and the following echoes.
+     * The delay time describes the time between the echoes.
      * @param time The delay time (in seconds).
      */
     public void setTime(double time) {

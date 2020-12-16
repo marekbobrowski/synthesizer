@@ -218,7 +218,7 @@ public class Knob extends Ellipse2D.Double implements ClickableElement {
     }
 
     /**
-     * @return Will always return true, because knob is supposed to be draggable.
+     * @return Will always return true, because a knob is supposed to be draggable.
      */
     @Override
     public boolean isDraggable() {

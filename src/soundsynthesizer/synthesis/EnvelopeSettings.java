@@ -1,23 +1,23 @@
 package soundsynthesizer.synthesis;
 
 /**
- * This class stores settings of an amplifier envelope:
+ * This class stores settings of an envelope:
  * attack time, decay time, sustain level, release time. All are stored in universal values (0 to 1).
  *
- * An amplifier envelope describes how the sound's volume changes over time.
+ * A signal envelope describes how the signal's amplitude changes over time.
  * Typical segments of such envelope are attack, decay, sustain and release.
- * - Attack segment is responsible for rising the volume of the sound.
- *   The volume goes from 0 to max.
- * - Decay segment is responsible for decaying the volume of the sound to the sustain level.
- *   The volume goes from max to the sustain level.
- * - Sustain is a segment with constant volume level. It lasts until the note is released.
- *   The volume stays at the sustain level.
- * - Release segment is responsible for decaying the volume of the sound after the note has been released.
- *   The volume goes from the sustain level to 0.
+ * - Attack segment is responsible for rising the amplitude of the signal.
+ *   The amplitude goes from 0 to max.
+ * - Decay segment is responsible for decaying the amplitude of the signal to the sustain level.
+ *   The amplitude goes from max to the sustain level.
+ * - Sustain is a segment with constant amplitude level. It lasts until the voice is released.
+ *   The amplitude stays at the sustain level.
+ * - Release segment is responsible for decaying the amplitude of the signal after the voice has been released.
+ *   The amplitude goes from the sustain level to 0.
  *
  * @author Marek Bobrowski
  */
-public class AmplifierEnvelopeSettings {
+public class EnvelopeSettings {
     /**
      * The attack time (0 to 1).
      */
@@ -41,7 +41,7 @@ public class AmplifierEnvelopeSettings {
     /**
      * An empty constructor.
      */
-    public AmplifierEnvelopeSettings() {
+    public EnvelopeSettings() {
     }
 
     /**

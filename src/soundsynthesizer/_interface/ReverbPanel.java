@@ -2,7 +2,6 @@ package soundsynthesizer._interface;
 
 import soundsynthesizer.delegates.DoubleSetter;
 import soundsynthesizer.delegates.DoubleGetter;
-import soundsynthesizer.synthesis.AmplifierEnvelopeSettings;
 import soundsynthesizer.synthesis.Reverb;
 
 /**

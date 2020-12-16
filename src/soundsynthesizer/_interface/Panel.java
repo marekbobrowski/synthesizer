@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**
  * This class works as a part of the synthesizer interface used for controlling one of the synthesizer modules.
- * For example reverb settings panel, amplifier envelope settings panel.
+ * For example reverb settings panel, envelope settings panel.
  * Such panel can contain labels and clickable elements: knobs, radio buttons.
  *
  * @author Marek Bobrowski

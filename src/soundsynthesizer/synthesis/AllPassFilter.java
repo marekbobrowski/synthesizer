@@ -1,8 +1,8 @@
 package soundsynthesizer.synthesis;
 
 /**
- * This class works as an all-pass filter for processing buffers of sound samples.
- * An all-pass filter passes all frequencies but provides a phase shift.
+ * This class works as an all-pass filter for processing sound buffers.
+ * An all-pass filter passes all frequencies but provides a different phase shift for different frequencies.
  *
  * Implementation of this all-pass filter is based on this circuit:
  *
@@ -30,13 +30,13 @@ public class AllPassFilter {
     private int delayPosition = 0;
 
     /**
-     * The absolute gain value for the feedback and the feedforward.
+     * The absolute gain value for the feedback and the feedforward signal.
      */
     private double gain;
 
     /**
      * Assigns the gain parameter and creates an array for the delayed samples.
-     * @param gain The absolute gain value for the feedback and the feedforward.
+     * @param gain The absolute gain value for the feedback and the feedforward signal.
      * @param delayTime Delay time in seconds.
      */
     public AllPassFilter(double gain, double delayTime) {

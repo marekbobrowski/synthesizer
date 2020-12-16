@@ -1,6 +1,6 @@
 package soundsynthesizer._interface;
 
-import soundsynthesizer.synthesis.Note;
+import soundsynthesizer.synthesis.Voice;
 import soundsynthesizer.synthesis.Synthesizer;
 
 import javax.sound.midi.MidiMessage;
@@ -10,18 +10,18 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class MidiHandler implements Receiver {
     /**
-     * The synthesizer that will play the notes.
+     * The synthesizer that will generate the voices.
      */
     private final Synthesizer synthesizer;
 
     /**
-     * A dictionary that stores currently played notes by their MIDI number.
+     * A dictionary that stores currently played voices by their MIDI note number.
      */
-    private final ConcurrentHashMap<Integer, Note> activeNotes = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Integer, Voice> activeVoices = new ConcurrentHashMap<>();
 
     /**
      * Constructor.
-     * @param synthesizer The synthesizer that will play the notes according to the received MIDI signals.
+     * @param synthesizer The synthesizer that will generate voices according to the received MIDI signals.
      */
     public MidiHandler(Synthesizer synthesizer) {
         this.synthesizer = synthesizer;
@@ -38,20 +38,20 @@ public class MidiHandler implements Receiver {
             int command = ((ShortMessage) message).getCommand();
             int noteNumber = ((ShortMessage) message).getData1();
             if (command == 144) {
-                if (activeNotes.get(noteNumber) != null) {
+                if (activeVoices.get(noteNumber) != null) {
                     return;
                 }
                 int interval = noteNumber - 69;
-                Note newNote = new Note(this.synthesizer, calculateFrequencyByInterval(interval));
-                activeNotes.put(noteNumber, newNote);
-                this.synthesizer.playNewNote(newNote);
+                Voice newVoice = new Voice(this.synthesizer, calculateFrequencyByInterval(interval));
+                activeVoices.put(noteNumber, newVoice);
+                this.synthesizer.createNewVoice(newVoice);
             }
             else if (command == 128) {
-                if (activeNotes.get(noteNumber) == null) {
+                if (activeVoices.get(noteNumber) == null) {
                     return;
                 }
-                activeNotes.get(noteNumber).triggerRelease();
-                activeNotes.remove(noteNumber);
+                activeVoices.get(noteNumber).triggerRelease();
+                activeVoices.remove(noteNumber);
             }
 
         }

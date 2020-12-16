@@ -97,7 +97,7 @@ public class KeyActionHandler extends KeyAdapter {
     /**
      * This nested class is used as a transmitter for sending MIDI signals into the {@link Receiver} object.
      */
-    class ComputerKeyboardTransmitter implements Transmitter {
+    static class ComputerKeyboardTransmitter implements Transmitter {
         /**
          * The MIDI receiver.
          */

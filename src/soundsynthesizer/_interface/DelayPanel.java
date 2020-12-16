@@ -2,7 +2,6 @@ package soundsynthesizer._interface;
 
 import soundsynthesizer.delegates.DoubleGetter;
 import soundsynthesizer.delegates.DoubleSetter;
-import soundsynthesizer.synthesis.Converter;
 import soundsynthesizer.synthesis.Delay;
 
 /**
@@ -16,7 +15,7 @@ public class DelayPanel extends Panel {
     /**
      * Creates knobs used for controlling the settings of the assigned delay effect.
      *
-     * @param delay It's parameters will be controller by this panel.
+     * @param delay It's parameters will be controlled by this panel.
      * @param x The X coordinate of this panel.
      * @param y The Y coordinate of this panel.
      */

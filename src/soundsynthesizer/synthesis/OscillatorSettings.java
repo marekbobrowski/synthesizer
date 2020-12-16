@@ -2,13 +2,13 @@ package soundsynthesizer.synthesis;
 
 /**
  * This class is responsible for storing oscillator settings of a synthesizer:
- * Wave types, frequency shifts, mix between the oscillators.
+ * Waveforms, frequency shifts, mix between the oscillators.
  *
  * @author Marek Bobrowski
  */
 public class OscillatorSettings {
     /**
-     * The wave type of the first oscillator.
+     * The waveform of the first oscillator.
      * 0 - sine wave
      * 1 - triangle wave
      * 2 - sawtooth wave
@@ -17,7 +17,7 @@ public class OscillatorSettings {
     private int oscillator1Type = 0;
 
     /**
-     * The wave type of the second oscillator.
+     * The waveform of the second oscillator.
      * 0 - sine wave
      * 1 - triangle wave
      * 2 - sawtooth wave
@@ -60,48 +60,48 @@ public class OscillatorSettings {
 
 
     /**
-     * Get the wave type of the first oscillator.
+     * Get the waveform of the first oscillator.
      * 0 - sine wave
      * 1 - triangle wave
      * 2 - sawtooth wave
      * 3 - pulse wave
-     * @return The wave type of the first oscillator.
+     * @return The waveform of the first oscillator.
      */
     public int getOscillator1Type() {
         return oscillator1Type;
     }
 
     /**
-     * Set the wave type of the first oscillator.
+     * Set the waveform of the first oscillator.
      * 0 - sine wave
      * 1 - triangle wave
      * 2 - sawtooth wave
      * 3 - pulse wave
-     * @param oscillator1Type The wave type of the first oscillator.
+     * @param oscillator1Type The waveform of the first oscillator.
      */
     public void setOscillator1Type(int oscillator1Type) {
         this.oscillator1Type = oscillator1Type;
     }
 
     /**
-     * Get the wave type of the second oscillator.
+     * Get the waveform of the second oscillator.
      * 0 - sine wave
      * 1 - triangle wave
      * 2 - sawtooth wave
      * 3 - pulse wave
-     * @return The wave type of the second oscillator.
+     * @return The waveform of the second oscillator.
      */
     public int getOscillator2Type() {
         return oscillator2Type;
     }
 
     /**
-     * Set the wave type of the second oscillator.
+     * Set the waveform of the second oscillator.
      * 0 - sine wave
      * 1 - triangle wave
      * 2 - sawtooth wave
      * 3 - pulse wave
-     * @param oscillator2Type The wave type of the second oscillator.
+     * @param oscillator2Type The waveform of the second oscillator.
      */
     public void setOscillator2Type(int oscillator2Type) {
         this.oscillator2Type = oscillator2Type;

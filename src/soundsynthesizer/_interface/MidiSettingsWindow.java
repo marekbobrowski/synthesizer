@@ -14,11 +14,6 @@ import java.util.ArrayList;
  */
 public class MidiSettingsWindow extends JFrame {
     /**
-     * The object responsible for handling the MIDI signals from the input.
-     */
-    private final MidiHandler midiHandler;
-
-    /**
      * The device that is sending the MIDI signal into the synthesizer.
      */
     private MidiDevice currentInputDevice;
@@ -26,7 +21,7 @@ public class MidiSettingsWindow extends JFrame {
     /**
      * Drop down menu for choosing an input device.
      */
-    private JComboBox<String> dropDownMenu;
+    private final JComboBox<String> dropDownMenu;
 
     /**
      * Constructor.
@@ -34,7 +29,6 @@ public class MidiSettingsWindow extends JFrame {
      */
     public MidiSettingsWindow(MidiHandler midiHandler) {
         super("MIDI input");
-        this.midiHandler = midiHandler;
 
         JPanel panel = new JPanel();
         panel.setBackground(new Color(0.2f, 0.2f, 0.2f));

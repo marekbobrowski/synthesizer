@@ -3,16 +3,16 @@ package soundsynthesizer.synthesis;
 import soundsynthesizer.delegates.IntGetter;
 
 /**
- * This class works as a single note of a sound synthesizer.
- * It generates sound using the available oscillators and runs them through an amplifier envelope.
+ * This class works as a single voice of a sound synthesizer.
+ * It generates signal using the available oscillators and runs them through an envelope.
  *
  * @author Marek Bobrowski
  */
-public class Note {
+public class Voice {
     /**
-     * The object that will process the sound by applying amplifier envelope to it.
+     * The object that will process the signal by applying an envelope to it.
      */
-    private final AmplifierEnvelopeProcessor amplifierEnvelopeProcessor;
+    private final EnvelopeGenerator envelopeGenerator;
 
     /**
      * The object that describes the parameters of the oscillators.
@@ -20,43 +20,43 @@ public class Note {
     private final OscillatorSettings oscillatorSettings;
 
     /**
-     * The synthesizer that created this note.
+     * The synthesizer that created this voice.
      */
     private final Synthesizer synthesizer;
 
     /**
-     * The frequency of this note.
+     * The frequency of this voice.
      */
     private final double frequency;
 
     /**
-     * The first oscillator that generates the sound for this note.
+     * The first oscillator that generates the signal for this voice.
      */
     private final Oscillator oscillator1;
 
     /**
-     * The second oscillator that generates the soudn for this note.
+     * The second oscillator that generates the signal for this voice.
      */
     private final Oscillator oscillator2;
 
     /**
-     * Tells if this note has been released on the keyboard.
+     * Tells if this voice has been released on the keyboard.
      */
     private boolean released = false;
 
     /**
-     * Tells if this note has ended playing (if the release stage of the envelopes have ended).
+     * Tells if this voice has ended playing (if the release stage of the envelopes has ended).
      */
     private boolean ended = false;
 
     /**
-     * Note constructor.
-     * @param synthesizer The synthesizer that is playing this note.
-     * @param frequency The frequency of this note.
+     * Voice constructor.
+     * @param synthesizer The synthesizer that is playing this voice.
+     * @param frequency The frequency of this voice.
      */
-    public Note(Synthesizer synthesizer, double frequency) {
+    public Voice(Synthesizer synthesizer, double frequency) {
         this.synthesizer = synthesizer;
-        amplifierEnvelopeProcessor = new AmplifierEnvelopeProcessor(this, synthesizer.getAmplifierEnvelope());
+        envelopeGenerator = new EnvelopeGenerator(this, synthesizer.getEnvelopeSettings());
         oscillatorSettings = synthesizer.getOscillatorSettings();
         this.frequency = frequency;
         IntGetter wave1 = oscillatorSettings::getOscillator1Type;
@@ -66,10 +66,10 @@ public class Note {
     }
 
     /**
-     * Generates a buffer of this note's sound.
-     * It gathers buffers from the available oscillators and applies an amplifier envelope to the sound.
+     * Generates a sound buffer for this voice.
+     * It gathers buffers from the available oscillators and applies an envelope to the signal.
      * @param bufferSize The size of the buffer to be generated.
-     * @return The generated sound buffer of this note.
+     * @return The generated sound buffer for this voice.
      */
     public double[][] prepareBuffer(int bufferSize) {
         double[][] oscillator1Buffer = oscillator1.gatherBuffer(frequency *
@@ -81,7 +81,7 @@ public class Note {
                         + oscillatorSettings.getOscillator2CentsShift())/1200.0),
                 bufferSize);
         double[][] mixedBuffer = mixOscillators(oscillator1Buffer, oscillator2Buffer);
-        amplifierEnvelopeProcessor.processBuffer(mixedBuffer);
+        envelopeGenerator.processBuffer(mixedBuffer);
         return mixedBuffer;
     }
 
@@ -102,61 +102,61 @@ public class Note {
     }
 
     /**
-     * Triggers the release of this note.
+     * Triggers the release of this voice.
      */
     public void triggerRelease() {
         this.released = true;
     }
 
     /**
-     * Handles the end of the amplifier envelope.
+     * Handles the end of the envelope.
      */
     public void handleEnvelopeEnd() {
-        synthesizer.endNote(this);
+        synthesizer.endVoice(this);
         ended = true;
     }
 
     /**
-     * Tells if this note has been released.
-     * @return If this note has been released.
+     * Tells if this voice has been released.
+     * @return If this voice has been released.
      */
     public boolean isReleased() {
         return this.released;
     }
 
     /**
-     * Tells if this note has ended (it should after the release stage of the amp envelope).
-     * @return If this note has ended.
+     * Tells if this voice has ended (it should after the release stage of the envelope).
+     * @return If this voice has ended.
      */
     public boolean hasEnded() {
         return ended;
     }
 
     /**
-     * Mixes and normalizes the passed buffers. First index stands for the note number (number of the buffer),
-     * second index stands for the channel, third index stands for the frame number.
-     * @param arraysOfSamples Arrays of buffers/samples (in the format specified in the method description).
+     * Mixes and normalizes the passed buffers. First index stands for the buffer/voice number,
+     * second index stands for the channel number, third index stands for the frame number.
+     * @param arraysOfBuffers Arrays of buffers (made in the format specified in the method description).
      * @param bufferSize The number of frames of a sound buffer.
-     * @return The buffer with the mixed and normalized sound.
+     * @return The buffer with the mixed and normalized signal.
      */
-    public static double[][] mixAndNormalizeNotes(double[][][] arraysOfSamples, int bufferSize) {
-        double[][] mixedSamples = new double[2][bufferSize];
+    public static double[][] mixAndNormalizeVoices(double[][][] arraysOfBuffers, int bufferSize) {
+        double[][] mixedBuffers = new double[2][bufferSize];
 
         for (int i = 0; i < bufferSize; i++) {
             double sumLeft = 0;
             double sumRight = 0;
 
-            for (int j = 0; j < arraysOfSamples.length; j++) {
-                if(i < arraysOfSamples[j][0].length) {
-                    sumLeft += arraysOfSamples[j][0][i];
-                    sumRight += arraysOfSamples[j][1][i];
+            for (int j = 0; j < arraysOfBuffers.length; j++) {
+                if(i < arraysOfBuffers[j][0].length) {
+                    sumLeft += arraysOfBuffers[j][0][i];
+                    sumRight += arraysOfBuffers[j][1][i];
                 }
             }
 
-            mixedSamples[0][i] = sumLeft / 16;
-            mixedSamples[1][i] = sumRight / 16;
+            mixedBuffers[0][i] = sumLeft / 16;
+            mixedBuffers[1][i] = sumRight / 16;
         }
-        return mixedSamples;
+        return mixedBuffers;
     }
 }
 

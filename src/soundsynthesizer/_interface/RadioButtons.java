@@ -151,7 +151,7 @@ public class RadioButtons implements ClickableElement {
     }
 
     /**
-     * Tells if the specifies mouse position lays on one of the radio buttons from this group.
+     * Tells if the specified mouse position lays on one of the radio buttons from this group.
      * @param mouseClick Current mouse position.
      * @return If the specified mouse position lays on one of the radio buttons from this group.
      */

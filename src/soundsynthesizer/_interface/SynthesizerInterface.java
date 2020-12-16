@@ -6,7 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import javax.sound.midi.MidiDevice;
 import javax.swing.JPanel;
 import soundsynthesizer.SynthesizerWindow;
 import soundsynthesizer.synthesis.Synthesizer;
@@ -15,8 +14,9 @@ import soundsynthesizer.synthesis.Synthesizer;
  * This class works as an interface for the assigned synthesizer.
  * It stores all the sub-interfaces (panels) for each of the synthesizer modules.
  * For example: a panel for reverb, a panel for oscillators etc.
- * It's responsible for handling the mouse actions on the interface.
- * It's responsible for drawing all the sub-interfaces (panels).
+ * It's responsible for:
+ * - handling the mouse actions on the interface.
+ * - drawing all the sub-interfaces (panels).
  *
  * @author Marek Bobrowski
  */
@@ -65,8 +65,8 @@ public class SynthesizerInterface extends JPanel {
         OscillatorPanel oscillatorPanel =
                 new OscillatorPanel(synthesizer.getOscillatorSettings(), 30, 30);
 
-        AmplifierEnvelopePanel amplifierEnvelopePanel =
-                new AmplifierEnvelopePanel(synthesizer.getAmplifierEnvelope(), 330, 60);
+        EnvelopePanel envelopePanel =
+                new EnvelopePanel(synthesizer.getEnvelopeSettings(), 330, 60);
 
         DelayPanel delayPanel =
                 new DelayPanel(synthesizer.getDelay(), 660, 60);
@@ -83,7 +83,7 @@ public class SynthesizerInterface extends JPanel {
         DetailPanel detailPanel = new DetailPanel(30, 300, this);
 
         panels.add(oscillatorPanel);
-        panels.add(amplifierEnvelopePanel);
+        panels.add(envelopePanel);
         panels.add(delayPanel);
         panels.add(reverbPanel);
         panels.add(detailPanel);

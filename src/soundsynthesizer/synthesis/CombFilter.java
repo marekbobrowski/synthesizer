@@ -3,7 +3,7 @@ package soundsynthesizer.synthesis;
 import java.util.Arrays;
 
 /**
- * This class works as a feedback comb filter for processing buffers of sound samples.
+ * This class works as a feedback comb filter for processing sound buffers.
  * A comb filter adds a delayed version of a signal to itself, causing peaks
  * and troughs in frequency response.
  * The internal loop of a feedback comb filter causes the delayed signal to be repeatably
@@ -30,7 +30,7 @@ public class CombFilter {
     private final double[] delayBuffer;
 
     /**
-     * The gain value for the feedback.
+     * The gain value for the feedback signal.
      */
     private double feedback;
 
@@ -41,7 +41,7 @@ public class CombFilter {
 
     /**
      * Assigns the feedback gain parameter and creates an array for the delayed samples.
-     * @param feedback The feedback gain value.
+     * @param feedback The feedback signal gain value.
      * @param delayTime Delay time in seconds.
      */
     public CombFilter(double feedback, double delayTime) {
@@ -68,8 +68,8 @@ public class CombFilter {
     }
 
     /**
-     * Sets the feedback gain parameter.
-     * @param feedback The gain value for the feedback.
+     * Sets the feedback signal gain parameter.
+     * @param feedback The gain value for the feedback signal.
      */
     public void setFeedback(double feedback) {
         this.feedback = feedback;
