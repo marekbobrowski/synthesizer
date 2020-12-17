@@ -1,4 +1,4 @@
-package soundsynthesizer;
+package soundsynthesizer._interface;
 
 import soundsynthesizer._interface.MidiSettingsWindow;
 import soundsynthesizer._interface.SynthesizerInterface;

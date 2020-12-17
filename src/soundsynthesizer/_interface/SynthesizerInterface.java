@@ -7,7 +7,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JPanel;
-import soundsynthesizer.SynthesizerWindow;
 import soundsynthesizer.synthesis.Synthesizer;
 
 /**

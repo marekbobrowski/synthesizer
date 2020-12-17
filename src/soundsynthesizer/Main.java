@@ -1,5 +1,6 @@
 package soundsynthesizer;
 
+import soundsynthesizer._interface.SynthesizerWindow;
 import soundsynthesizer.synthesis.Synthesizer;
 
 /**
