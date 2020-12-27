@@ -20,22 +20,22 @@ public class Reverb {
     private double mix = 0;
 
     // Initialization of all comb filters.
-    private final CombFilter cf1 = new CombFilter(decay, 0.0297);
-    private final CombFilter cf2 = new CombFilter(decay, 0.0371);
-    private final CombFilter cf3 = new CombFilter(decay, 0.0411);
-    private final CombFilter cf4 = new CombFilter(decay, 0.0137);
-    private final CombFilter cf5 = new CombFilter(decay, 0.0237);
-    private final CombFilter cf6 = new CombFilter(decay, 0.0375);
-    private final CombFilter cf7 = new CombFilter(decay, 0.0333);
-    private final CombFilter cf8 = new CombFilter(decay, 0.0354);
+    private final CombFilter cf1 = new CombFilter(decay, 1309);
+    private final CombFilter cf2 = new CombFilter(decay, 1636);
+    private final CombFilter cf3 = new CombFilter(decay, 1812);
+    private final CombFilter cf4 = new CombFilter(decay, 604);
+    private final CombFilter cf5 = new CombFilter(decay, 1045);
+    private final CombFilter cf6 = new CombFilter(decay, 1653);
+    private final CombFilter cf7 = new CombFilter(decay, 1468);
+    private final CombFilter cf8 = new CombFilter(decay, 1561);
 
     // Initialization of all all-pass filters.
-    private final AllPassFilter apf1 = new AllPassFilter(decay, 0.005);
-    private final AllPassFilter apf2 = new AllPassFilter(decay, 0.0117);
-    private final AllPassFilter apf3 = new AllPassFilter(decay, 0.0217);
-    private final AllPassFilter apf4 = new AllPassFilter(decay, 0.0162);
-    private final AllPassFilter apf5 = new AllPassFilter(decay, 0.0213);
-    private final AllPassFilter apf6 = new AllPassFilter(decay, 0.0158);
+    private final AllPassFilter apf1 = new AllPassFilter(decay, 220);
+    private final AllPassFilter apf2 = new AllPassFilter(decay, 515);
+    private final AllPassFilter apf3 = new AllPassFilter(decay, 956);
+    private final AllPassFilter apf4 = new AllPassFilter(decay, 714);
+    private final AllPassFilter apf5 = new AllPassFilter(decay, 939);
+    private final AllPassFilter apf6 = new AllPassFilter(decay, 696);
 
     /**
      * Empty constructor.
@@ -65,9 +65,8 @@ public class Reverb {
             output[0][i] = cf1Samples[0][i] + cf2Samples[0][i] +
                     cf3Samples[0][i] + cf4Samples[0][i] +
                     cf5Samples[0][i] + cf6Samples[0][i] +
-                    cf7Samples[0][i] + cf8Samples[0][i] +
-                    buffer[0][i];
-            output[0][i] /= 9;
+                    cf7Samples[0][i] + cf8Samples[0][i];
+            output[0][i] /= 8;
             output[1][i] = output[0][i];
         }
 

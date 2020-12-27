@@ -28,7 +28,7 @@ public class MidiHandler implements Receiver {
     }
 
     /**
-     * Accepts the MIDI signal sent by a {@link Receiver} object.
+     * Accepts the MIDI signal sent by a {@link javax.sound.midi.Transmitter} object.
      * @param message The MIDI message.
      * @param timeStamp This argument is unimportant in this application.
      */
@@ -38,11 +38,11 @@ public class MidiHandler implements Receiver {
             int command = ((ShortMessage) message).getCommand();
             int noteNumber = ((ShortMessage) message).getData1();
             if (command == 144) {
-                if (activeVoices.get(noteNumber) != null) {
+                if (activeVoices.size() >= 16) {
                     return;
                 }
                 int interval = noteNumber - 69;
-                Voice newVoice = new Voice(this.synthesizer, calculateFrequencyByInterval(interval));
+                Voice newVoice = new Voice(this.synthesizer, this, calculateFrequencyByInterval(interval));
                 activeVoices.put(noteNumber, newVoice);
                 this.synthesizer.createNewVoice(newVoice);
             }
@@ -51,10 +51,17 @@ public class MidiHandler implements Receiver {
                     return;
                 }
                 activeVoices.get(noteNumber).triggerRelease();
-                activeVoices.remove(noteNumber);
             }
 
         }
+    }
+
+    /**
+     * End the voice by removing the voice from the activeVoices list.
+     * @param voice The voice to be ended.
+     */
+    public void endVoice(Voice voice) {
+        activeVoices.values().remove(voice);
     }
 
     /**

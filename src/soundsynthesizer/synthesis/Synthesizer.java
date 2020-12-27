@@ -123,11 +123,31 @@ public class Synthesizer implements Runnable {
      * @param bufferSize The number of frames of a sound buffer.
      */
     private double[][] returnProcessedVoices(double[][][] allVoiceBuffers, int bufferSize) {
-        double[][] mixedVoices = Voice.mixAndNormalizeVoices(allVoiceBuffers, bufferSize);
+        double[][] mixedVoices = mixVoices(allVoiceBuffers, bufferSize);
         delay.processBuffer(mixedVoices);
         mixedVoices = reverb.createProcessedBuffer(mixedVoices);
         volume.processBuffer(mixedVoices);
         return mixedVoices;
+    }
+
+    /**
+     * Mixes the passed voice buffers. First index stands for the buffer/voice number,
+     * second index stands for the channel number, third index stands for the frame number.
+     * @param arraysOfBuffers Arrays of buffers (made in the format specified in the method description).
+     * @param bufferSize The number of frames of a sound buffer.
+     * @return The buffer with the mixed and normalized signal.
+     */
+    private static double[][] mixVoices(double[][][] arraysOfBuffers, int bufferSize) {
+        double[][] mixedBuffers = new double[2][bufferSize];
+        for (int i = 0; i < bufferSize; i++) {
+            for (int j = 0; j < arraysOfBuffers.length; j++) {
+                if(i < arraysOfBuffers[j][0].length) {
+                    mixedBuffers[0][i] += arraysOfBuffers[j][0][i]/16;
+                    mixedBuffers[1][i] += arraysOfBuffers[j][1][i]/16;
+                }
+            }
+        }
+        return mixedBuffers;
     }
 
     /**

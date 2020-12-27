@@ -1,5 +1,6 @@
 package soundsynthesizer.synthesis;
 
+import soundsynthesizer._interface.MidiHandler;
 import soundsynthesizer.delegates.IntGetter;
 
 /**
@@ -23,6 +24,11 @@ public class Voice {
      * The synthesizer that created this voice.
      */
     private final Synthesizer synthesizer;
+
+    /**
+     * The midi handler that triggered this voice.
+     */
+    private final MidiHandler midiHandler;
 
     /**
      * The frequency of this voice.
@@ -52,10 +58,12 @@ public class Voice {
     /**
      * Voice constructor.
      * @param synthesizer The synthesizer that is playing this voice.
+     * @param midiHandler The midi handler that triggered this voice.
      * @param frequency The frequency of this voice.
      */
-    public Voice(Synthesizer synthesizer, double frequency) {
+    public Voice(Synthesizer synthesizer, MidiHandler midiHandler, double frequency) {
         this.synthesizer = synthesizer;
+        this.midiHandler = midiHandler;
         envelopeGenerator = new EnvelopeGenerator(this, synthesizer.getEnvelopeSettings());
         oscillatorSettings = synthesizer.getOscillatorSettings();
         this.frequency = frequency;
@@ -113,6 +121,7 @@ public class Voice {
      */
     public void handleEnvelopeEnd() {
         synthesizer.endVoice(this);
+        midiHandler.endVoice(this);
         ended = true;
     }
 
@@ -132,31 +141,5 @@ public class Voice {
         return ended;
     }
 
-    /**
-     * Mixes and normalizes the passed buffers. First index stands for the buffer/voice number,
-     * second index stands for the channel number, third index stands for the frame number.
-     * @param arraysOfBuffers Arrays of buffers (made in the format specified in the method description).
-     * @param bufferSize The number of frames of a sound buffer.
-     * @return The buffer with the mixed and normalized signal.
-     */
-    public static double[][] mixAndNormalizeVoices(double[][][] arraysOfBuffers, int bufferSize) {
-        double[][] mixedBuffers = new double[2][bufferSize];
-
-        for (int i = 0; i < bufferSize; i++) {
-            double sumLeft = 0;
-            double sumRight = 0;
-
-            for (int j = 0; j < arraysOfBuffers.length; j++) {
-                if(i < arraysOfBuffers[j][0].length) {
-                    sumLeft += arraysOfBuffers[j][0][i];
-                    sumRight += arraysOfBuffers[j][1][i];
-                }
-            }
-
-            mixedBuffers[0][i] = sumLeft / 16;
-            mixedBuffers[1][i] = sumRight / 16;
-        }
-        return mixedBuffers;
-    }
 }
 

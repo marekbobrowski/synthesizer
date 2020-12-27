@@ -44,9 +44,9 @@ public class CombFilter {
      * @param feedback The feedback signal gain value.
      * @param delayTime Delay time in seconds.
      */
-    public CombFilter(double feedback, double delayTime) {
+    public CombFilter(double feedback, int delayTime) {
         this.feedback = feedback;
-        delayBuffer = new double[(int)(delayTime * Converter.SAMPLE_RATE)];
+        delayBuffer = new double[delayTime];
     }
 
     /**

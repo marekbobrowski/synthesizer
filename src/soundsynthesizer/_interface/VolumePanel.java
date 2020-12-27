@@ -13,8 +13,8 @@ public class VolumePanel extends Panel {
     public VolumePanel(Volume volume, double x, double y) {
         DoubleGetter getVolume = volume::getVolume;
         DoubleSetter setVolume = volume::setVolume;
-        clickableElements.add(new Knob(x, y, 30, "vol", "Volume",
-                0, 1, 0.01, getVolume, setVolume));
+        clickableElements.add(new Knob(x, y, 30, "vol", "Volume [dB]",
+                -45, 3, 1, getVolume, setVolume));
         labels.add(new Label((int)x + 5, (int)y - 35, "volume"));
 
     }
