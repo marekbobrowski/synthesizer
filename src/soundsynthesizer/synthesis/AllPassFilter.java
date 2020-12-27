@@ -37,11 +37,11 @@ public class AllPassFilter {
     /**
      * Assigns the gain parameter and creates an array for the delayed samples.
      * @param gain The absolute gain value for the feedback and the feedforward signal.
-     * @param delayTime Delay time in seconds.
+     * @param delay Number of samples of delay.
      */
-    public AllPassFilter(double gain, int delayTime) {
+    public AllPassFilter(double gain, int delay) {
         this.gain = gain;
-        delayBuffer = new double[delayTime];
+        delayBuffer = new double[delay];
     }
 
     /**

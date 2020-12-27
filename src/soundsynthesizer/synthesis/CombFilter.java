@@ -42,11 +42,11 @@ public class CombFilter {
     /**
      * Assigns the feedback gain parameter and creates an array for the delayed samples.
      * @param feedback The feedback signal gain value.
-     * @param delayTime Delay time in seconds.
+     * @param delay Number of samples of delay.
      */
-    public CombFilter(double feedback, int delayTime) {
+    public CombFilter(double feedback, int delay) {
         this.feedback = feedback;
-        delayBuffer = new double[delayTime];
+        delayBuffer = new double[delay];
     }
 
     /**
