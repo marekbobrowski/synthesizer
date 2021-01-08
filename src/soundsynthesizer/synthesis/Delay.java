@@ -52,7 +52,6 @@ public class Delay {
      */
     public void processBuffer(double[][] buffer) {
         double lastValue;
-
         for (int i = 0; i < buffer[0].length; i++) {
             lastValue = buffer[0][i] + delayBuffer[delayPosition] * feedback;
             buffer[0][i] = (1 - mix) * buffer[0][i] + mix * delayBuffer[delayPosition] * feedback;

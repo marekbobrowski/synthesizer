@@ -67,8 +67,8 @@ public class Voice {
         envelopeGenerator = new EnvelopeGenerator(this, synthesizer.getEnvelopeSettings());
         oscillatorSettings = synthesizer.getOscillatorSettings();
         this.frequency = frequency;
-        IntGetter wave1 = oscillatorSettings::getOscillator1Type;
-        IntGetter wave2 = oscillatorSettings::getOscillator2Type;
+        IntGetter wave1 = oscillatorSettings::getOscillator1Shape;
+        IntGetter wave2 = oscillatorSettings::getOscillator2Shape;
         oscillator1 = new Oscillator(wave1);
         oscillator2 = new Oscillator(wave2);
     }
@@ -80,11 +80,11 @@ public class Voice {
      * @return The generated sound buffer for this voice.
      */
     public double[][] prepareBuffer(int bufferSize) {
-        double[][] oscillator1Buffer = oscillator1.gatherBuffer(frequency *
+        double[][] oscillator1Buffer = oscillator1.generateBuffer(frequency *
                 Math.pow(2,(oscillatorSettings.getOscillator1SemitonesShift()*100
                         + oscillatorSettings.getOscillator1CentsShift())/1200.0),
                 bufferSize);
-        double[][] oscillator2Buffer = oscillator2.gatherBuffer(frequency *
+        double[][] oscillator2Buffer = oscillator2.generateBuffer(frequency *
                 Math.pow(2,(oscillatorSettings.getOscillator2SemitonesShift()*100
                         + oscillatorSettings.getOscillator2CentsShift())/1200.0),
                 bufferSize);
@@ -120,7 +120,7 @@ public class Voice {
      * Handles the end of the envelope.
      */
     public void handleEnvelopeEnd() {
-        synthesizer.endVoice(this);
+        synthesizer.finishVoice(this);
         midiHandler.endVoice(this);
         ended = true;
     }

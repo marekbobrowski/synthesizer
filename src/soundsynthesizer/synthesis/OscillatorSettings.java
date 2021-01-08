@@ -14,7 +14,7 @@ public class OscillatorSettings {
      * 2 - sawtooth wave
      * 3 - pulse wave
      */
-    private int oscillator1Type = 0;
+    private int oscillator1Shape = 0;
 
     /**
      * The waveform of the second oscillator.
@@ -23,7 +23,7 @@ public class OscillatorSettings {
      * 2 - sawtooth wave
      * 3 - pulse wave
      */
-    private int oscillator2Type = 0;
+    private int oscillator2Shape = 0;
 
     /**
      * The semitone shift of the first oscillator.
@@ -67,8 +67,8 @@ public class OscillatorSettings {
      * 3 - pulse wave
      * @return The waveform of the first oscillator.
      */
-    public int getOscillator1Type() {
-        return oscillator1Type;
+    public int getOscillator1Shape() {
+        return oscillator1Shape;
     }
 
     /**
@@ -77,10 +77,10 @@ public class OscillatorSettings {
      * 1 - triangle wave
      * 2 - sawtooth wave
      * 3 - pulse wave
-     * @param oscillator1Type The waveform of the first oscillator.
+     * @param oscillator1Shape The waveform of the first oscillator.
      */
-    public void setOscillator1Type(int oscillator1Type) {
-        this.oscillator1Type = oscillator1Type;
+    public void setOscillator1Shape(int oscillator1Shape) {
+        this.oscillator1Shape = oscillator1Shape;
     }
 
     /**
@@ -91,8 +91,8 @@ public class OscillatorSettings {
      * 3 - pulse wave
      * @return The waveform of the second oscillator.
      */
-    public int getOscillator2Type() {
-        return oscillator2Type;
+    public int getOscillator2Shape() {
+        return oscillator2Shape;
     }
 
     /**
@@ -101,10 +101,10 @@ public class OscillatorSettings {
      * 1 - triangle wave
      * 2 - sawtooth wave
      * 3 - pulse wave
-     * @param oscillator2Type The waveform of the second oscillator.
+     * @param oscillator2Shape The waveform of the second oscillator.
      */
-    public void setOscillator2Type(int oscillator2Type) {
-        this.oscillator2Type = oscillator2Type;
+    public void setOscillator2Shape(int oscillator2Shape) {
+        this.oscillator2Shape = oscillator2Shape;
     }
 
     /**

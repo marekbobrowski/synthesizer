@@ -4,7 +4,6 @@ import soundsynthesizer.delegates.IntGetter;
 import soundsynthesizer.delegates.DoubleSetter;
 import soundsynthesizer.delegates.IntSetter;
 import soundsynthesizer.delegates.DoubleGetter;
-import soundsynthesizer.synthesis.Converter;
 import soundsynthesizer.synthesis.OscillatorSettings;
 
 /**
@@ -22,10 +21,10 @@ public class OscillatorPanel extends Panel {
      * @param y The Y coordinate of this panel.
      */
     public OscillatorPanel(OscillatorSettings oscillatorSettings, double x, double y) {
-        IntGetter getOscillator1Type = oscillatorSettings::getOscillator1Type;
-        IntSetter setOscillator1Type = oscillatorSettings::setOscillator1Type;
-        IntGetter getOscillator2Type = oscillatorSettings::getOscillator2Type;
-        IntSetter setOscillator2Type = oscillatorSettings::setOscillator2Type;
+        IntGetter getOscillator1Type = oscillatorSettings::getOscillator1Shape;
+        IntSetter setOscillator1Type = oscillatorSettings::setOscillator1Shape;
+        IntGetter getOscillator2Type = oscillatorSettings::getOscillator2Shape;
+        IntSetter setOscillator2Type = oscillatorSettings::setOscillator2Shape;
         DoubleGetter getOscillator1SemitonesShift = oscillatorSettings::getOscillator1SemitonesShift;
         DoubleSetter setOscillator1SemitonesShift = oscillatorSettings::setOscillator1SemitonesShift;
         DoubleGetter getOscillator1CentsShift = oscillatorSettings::getOscillator1CentsShift;

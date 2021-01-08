@@ -44,7 +44,7 @@ public class MidiHandler implements Receiver {
                 int interval = noteNumber - 69;
                 Voice newVoice = new Voice(this.synthesizer, this, calculateFrequencyByInterval(interval));
                 activeVoices.put(noteNumber, newVoice);
-                this.synthesizer.createNewVoice(newVoice);
+                this.synthesizer.addNewVoice(newVoice);
             }
             else if (command == 128) {
                 if (activeVoices.get(noteNumber) == null) {

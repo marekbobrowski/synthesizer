@@ -67,24 +67,24 @@ public class Synthesizer implements Runnable {
 
     /**
      * Add the voice to the "waiting room" - 'voicesToBeAdded' list.
-     * @param newVoice The voice to be created.
+     * @param newVoice The voice to be added.
      */
-    public void createNewVoice(Voice newVoice) {
+    public void addNewVoice(Voice newVoice) {
         voicesToBeAdded.add(newVoice);
     }
 
     /**
      * Add the voice to the 'voicesToBeRemoved' list.
-     * @param voice The voice to be removed.
+     * @param voice The voice to be finished.
      */
-    public void endVoice(Voice voice) {
+    public void finishVoice(Voice voice) {
         voicesToBeRemoved.add(voice);
     }
 
     /**
      * Remove the 'voicesToBeRemoved' list from the 'voices' list.
      */
-    private void endFinishedVoices() {
+    private void removeFinishedVoices() {
         for(Voice n: voicesToBeRemoved) {
             voices.remove(n);
         }
@@ -104,7 +104,7 @@ public class Synthesizer implements Runnable {
      * @param bufferSize The number of frames of a sound buffer.
      * @return The array of sound buffers created by all the voices.
      */
-    private double[][][] gatherBuffersFromAllVoices(int bufferSize) {
+    private double[][][] gatherAllVoices(int bufferSize) {
         double[][][] allVoiceBuffers = new double[voices.size()][2][bufferSize];
         int index = 0;
         for(Voice n : voices) {
@@ -119,31 +119,29 @@ public class Synthesizer implements Runnable {
 
     /**
      * Returns mixed and processed sound of all buffers.
-     * @param allVoiceBuffers The buffers to be mixed and processed.
-     * @param bufferSize The number of frames of a sound buffer.
+     * @param buffer The buffer to be processed.
      */
-    private double[][] returnProcessedVoices(double[][][] allVoiceBuffers, int bufferSize) {
-        double[][] mixedVoices = mixVoices(allVoiceBuffers, bufferSize);
-        delay.processBuffer(mixedVoices);
-        mixedVoices = reverb.createProcessedBuffer(mixedVoices);
-        volume.processBuffer(mixedVoices);
-        return mixedVoices;
+    private double[][] createPostProcessedBuffer(double[][] buffer) {
+        delay.processBuffer(buffer);
+        buffer = reverb.createProcessedBuffer(buffer);
+        volume.processBuffer(buffer);
+        return buffer;
     }
 
     /**
-     * Mixes the passed voice buffers. First index stands for the buffer/voice number,
+     * Mixes the passed buffers. First index stands for the buffer number,
      * second index stands for the channel number, third index stands for the frame number.
-     * @param arraysOfBuffers Arrays of buffers (made in the format specified in the method description).
+     * @param buffers Array of buffers (made in the format specified in the method description).
      * @param bufferSize The number of frames of a sound buffer.
-     * @return The buffer with the mixed and normalized signal.
+     * @return The buffer with the mixed signal.
      */
-    private static double[][] mixVoices(double[][][] arraysOfBuffers, int bufferSize) {
+    private static double[][] mixBuffers(double[][][] buffers, int bufferSize) {
         double[][] mixedBuffers = new double[2][bufferSize];
         for (int i = 0; i < bufferSize; i++) {
-            for (int j = 0; j < arraysOfBuffers.length; j++) {
-                if(i < arraysOfBuffers[j][0].length) {
-                    mixedBuffers[0][i] += arraysOfBuffers[j][0][i]/16;
-                    mixedBuffers[1][i] += arraysOfBuffers[j][1][i]/16;
+            for (int j = 0; j < buffers.length; j++) {
+                if(i < buffers[j][0].length) {
+                    mixedBuffers[0][i] += buffers[j][0][i]/16;
+                    mixedBuffers[1][i] += buffers[j][1][i]/16;
                 }
             }
         }
@@ -161,36 +159,38 @@ public class Synthesizer implements Runnable {
     /**
      * Continuous process of buffering the sound:
      * 1. Add voices that have been recently triggered.
-     * 2. Remove the voices that ended.
+     * 2. Remove the voices that have been finished.
      * 3. Gather the buffers from all the existing voices.
-     * 4. Mix and process the gathered buffers.
+     * 4. Mix all the voice buffers.
+     * 5. Post-process the mixed buffers (reverb, delay, volume).
      * 5. Send the processed sound to the output.
      */
     @Override
     public void run() {
         double[][][] allVoiceBuffers;
-        this.keepBuffering = true;
+        keepBuffering = true;
         while (keepBuffering) {
             int bufferSize = converter.getBufferSize();
             acceptNewVoices();
-            endFinishedVoices();
-            allVoiceBuffers = gatherBuffersFromAllVoices(bufferSize);
-            double[][] processedVoices = returnProcessedVoices(allVoiceBuffers, bufferSize);
-            converter.streamBuffer(processedVoices);
+            removeFinishedVoices();
+            allVoiceBuffers = gatherAllVoices(bufferSize);
+            double[][] mixedVoicesBuffer = mixBuffers(allVoiceBuffers, bufferSize);
+            double[][] postProcessedBuffer = createPostProcessedBuffer(mixedVoicesBuffer);
+            converter.streamBuffer(postProcessedBuffer);
         }
     }
 
     /**
-     * Get the delay effect used to process the sound of this synthesizer.
-     * @return The delay effect used to process the sound of this synthesizer.
+     * Get the delay effect used to process the signal of this synthesizer.
+     * @return The delay effect used to process the signal of this synthesizer.
      */
     public Delay getDelay() {
         return delay;
     }
 
     /**
-     * Get reverberation effect used to process the sound of this synthesizer.
-     * @return The reverberation effect used to process the sound of this synthesizer.
+     * Get reverberation effect used to process the signal of this synthesizer.
+     * @return The reverberation effect used to process the signal of this synthesizer.
      */
     public Reverb getReverb() {
         return reverb;
