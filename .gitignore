@@ -1,5 +1,5 @@
 .idea
 *.iml
 out
-src/soundsynthesizer/**/*.plantuml
+src/synthesizer/**/*.plantuml
 *.plantuml
