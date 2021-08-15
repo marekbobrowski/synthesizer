@@ -6,7 +6,7 @@ A software synthesizer written as a part of my engineer's thesis, using only Jav
 
 ## Main modules
 * Two Oscillators With Four Standard Waveforms
-* Ampltide Envelope
+* Amplitude Envelope
 * Delay Effect
 * Reverb Effect
 * Output Volume Setting
