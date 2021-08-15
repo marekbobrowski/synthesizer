@@ -17,6 +17,8 @@ The notes can be triggered using computer keyboard in a similiar fashion to how 
 You can also select a MIDI device connected to your computer (*Settings -> MIDI input*) to capture the MIDI note on/off messages.
 The settings can be adjusted by clicking on a knob and dragging your mouse up/down.
 
+If you notice any stuttering please increase the buffer size in **Converter.java** class (it's constructor to be exact), this part has not been perfected yet :smile:.
+
 ## Some more details about the modules
 * Oscillators - for each of the oscillators choose a waveform from sine, triangle, sawtooth and square; setup the pitch shift in semitones and cents; finally adjust the balance between the two oscillators.
 * Amplitude Envelope - standard ADSR (attack, decay, sustain, release) envelope.
