@@ -1,7 +1,7 @@
 package synthesizer;
 
-import synthesizer._interface.SynthesizerWindow;
-import synthesizer.synthesis.Synthesizer;
+import synthesizer._interface.gui.SynthesizerWindow;
+import synthesizer.signalprocessing.Synthesizer;
 
 /**
  * Class used for starting the synthesizer application.
