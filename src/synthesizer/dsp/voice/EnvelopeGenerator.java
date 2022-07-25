@@ -1,8 +1,7 @@
-package synthesizer.signalprocessing.voice;
+package synthesizer.dsp.voice;
 
 import synthesizer.models.EnvelopeSettings;
-import synthesizer.signalprocessing.Converter;
-import synthesizer.signalprocessing.voice.Voice;
+import synthesizer.dsp.Converter;
 
 /**
  * This class processes the sound by applying an amplitude envelope to sound buffers.

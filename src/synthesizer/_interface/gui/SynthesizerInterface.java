@@ -12,7 +12,7 @@ import synthesizer._interface.gui.panels.*;
 import synthesizer._interface.gui.units.ClickableElement;
 import synthesizer._interface.input.KeyActionHandler;
 import synthesizer._interface.input.MidiHandler;
-import synthesizer.signalprocessing.Synthesizer;
+import synthesizer.dsp.Synthesizer;
 
 /**
  * This class works as an interface for the assigned synthesizer.

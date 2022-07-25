@@ -5,7 +5,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.*;
 
-import synthesizer.signalprocessing.Synthesizer;
+import synthesizer.dsp.Synthesizer;
 
 /**
  * This class works as a window for interface of a synthesizer.

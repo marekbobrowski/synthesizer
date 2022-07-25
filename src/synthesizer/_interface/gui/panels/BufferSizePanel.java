@@ -4,7 +4,7 @@ import synthesizer._interface.gui.units.Label;
 import synthesizer._interface.gui.units.RadioButtons;
 import synthesizer.utils.delegates.IntGetter;
 import synthesizer.utils.delegates.IntSetter;
-import synthesizer.signalprocessing.Converter;
+import synthesizer.dsp.Converter;
 
 /**
  * This class works as a panel for controlling the sound buffer size of assigned {@link Converter} object.

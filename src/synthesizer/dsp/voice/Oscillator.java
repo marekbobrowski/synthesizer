@@ -1,7 +1,7 @@
-package synthesizer.signalprocessing.voice;
+package synthesizer.dsp.voice;
 
 import synthesizer.utils.delegates.IntGetter;
-import synthesizer.signalprocessing.Converter;
+import synthesizer.dsp.Converter;
 
 /**
  * This class is responsible for generating a periodic signal according to the specified parameters.

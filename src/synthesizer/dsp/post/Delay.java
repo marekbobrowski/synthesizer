@@ -1,6 +1,6 @@
-package synthesizer.signalprocessing.post;
+package synthesizer.dsp.post;
 
-import synthesizer.signalprocessing.Converter;
+import synthesizer.dsp.Converter;
 
 /**
  * This class is responsible for creating a delay (echo) effect on a passed sound buffer.

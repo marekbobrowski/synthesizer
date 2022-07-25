@@ -1,11 +1,11 @@
-package synthesizer.signalprocessing;
+package synthesizer.dsp;
 
 import synthesizer.models.EnvelopeSettings;
 import synthesizer.models.OscillatorSettings;
-import synthesizer.signalprocessing.post.Delay;
-import synthesizer.signalprocessing.post.Reverb;
-import synthesizer.signalprocessing.voice.Voice;
-import synthesizer.signalprocessing.post.Volume;
+import synthesizer.dsp.post.Delay;
+import synthesizer.dsp.post.Reverb;
+import synthesizer.dsp.voice.Voice;
+import synthesizer.dsp.post.Volume;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 

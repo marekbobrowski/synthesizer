@@ -1,4 +1,4 @@
-package synthesizer.signalprocessing.post;
+package synthesizer.dsp.post;
 
 /**
  * This class works as an all-pass filter for processing sound buffers.

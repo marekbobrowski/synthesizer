@@ -4,7 +4,7 @@ import synthesizer._interface.gui.units.Knob;
 import synthesizer._interface.gui.units.Label;
 import synthesizer.utils.delegates.DoubleSetter;
 import synthesizer.utils.delegates.DoubleGetter;
-import synthesizer.signalprocessing.post.Reverb;
+import synthesizer.dsp.post.Reverb;
 
 /**
  * This class works as a panel for controlling the parameters of the assigned {@link Reverb}.

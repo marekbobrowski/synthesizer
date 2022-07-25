@@ -1,9 +1,9 @@
-package synthesizer.signalprocessing.voice;
+package synthesizer.dsp.voice;
 
 import synthesizer._interface.input.MidiHandler;
 import synthesizer.utils.delegates.IntGetter;
 import synthesizer.models.OscillatorSettings;
-import synthesizer.signalprocessing.Synthesizer;
+import synthesizer.dsp.Synthesizer;
 
 /**
  * This class works as a single voice of a sound synthesizer.

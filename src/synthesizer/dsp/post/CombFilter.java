@@ -1,4 +1,4 @@
-package synthesizer.signalprocessing.post;
+package synthesizer.dsp.post;
 
 import java.util.Arrays;
 

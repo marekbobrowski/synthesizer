@@ -1,4 +1,4 @@
-package synthesizer.signalprocessing.post;
+package synthesizer.dsp.post;
 
 /**
  * This class is responsible for creating a reverberation effect on a passed sound buffer.

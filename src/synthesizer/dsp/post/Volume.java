@@ -1,4 +1,4 @@
-package synthesizer.signalprocessing.post;
+package synthesizer.dsp.post;
 
 /**
  * This class is responsible for changing the volume (the output loudness) of the signal.

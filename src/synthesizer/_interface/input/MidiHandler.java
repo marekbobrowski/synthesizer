@@ -1,7 +1,7 @@
 package synthesizer._interface.input;
 
-import synthesizer.signalprocessing.voice.Voice;
-import synthesizer.signalprocessing.Synthesizer;
+import synthesizer.dsp.voice.Voice;
+import synthesizer.dsp.Synthesizer;
 
 import javax.sound.midi.MidiMessage;
 import javax.sound.midi.Receiver;

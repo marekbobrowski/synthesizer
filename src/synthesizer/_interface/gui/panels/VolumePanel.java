@@ -4,7 +4,7 @@ import synthesizer._interface.gui.units.Knob;
 import synthesizer._interface.gui.units.Label;
 import synthesizer.utils.delegates.DoubleGetter;
 import synthesizer.utils.delegates.DoubleSetter;
-import synthesizer.signalprocessing.post.Volume;
+import synthesizer.dsp.post.Volume;
 
 /**
  * This class works as a panel for controlling the volume (the output loudness) of the synthesizer.

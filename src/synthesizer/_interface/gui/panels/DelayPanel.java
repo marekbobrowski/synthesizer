@@ -4,7 +4,7 @@ import synthesizer._interface.gui.units.Knob;
 import synthesizer._interface.gui.units.Label;
 import synthesizer.utils.delegates.DoubleGetter;
 import synthesizer.utils.delegates.DoubleSetter;
-import synthesizer.signalprocessing.post.Delay;
+import synthesizer.dsp.post.Delay;
 
 /**
  * This class works as a panel for controlling the settings of the assigned delay effect.
