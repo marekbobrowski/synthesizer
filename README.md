@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/marekbobrowski/synthesizer/master/doc/gui.png">
 
-A software synthesizer written as a part of my engineer's thesis, using only Java SE libraries.
+A software synthesizer written as a part of my engineer's thesis, using **only Java SE libraries**.
 
 ## Main modules
 * Two Oscillators With Four Standard Waveforms
