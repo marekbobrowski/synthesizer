@@ -4,7 +4,7 @@ A software synthesizer written from scratch as a part of my engineer's thesis, u
 
 ## Application showcase (turn on the audio)
 
-https://user-images.githubusercontent.com/49000055/180989814-2fb10f52-6ce1-4733-a073-ef9a372c2d85.mp4
+https://user-images.githubusercontent.com/49000055/180997944-309b2013-1201-4821-acfd-66a3b3aeb14e.mp4
 
 ## Main modules
 * Two Oscillators With Four Standard Waveforms
