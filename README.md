@@ -1,8 +1,10 @@
 # synthesizer
 
-<img src="https://raw.githubusercontent.com/marekbobrowski/synthesizer/master/doc/gui.png">
-
 A software synthesizer written from scratch as a part of my engineer's thesis, using **only Java SE libraries**.
+
+## Application showcase (turn on the audio)
+
+https://user-images.githubusercontent.com/49000055/180989814-2fb10f52-6ce1-4733-a073-ef9a372c2d85.mp4
 
 ## Main modules
 * Two Oscillators With Four Standard Waveforms
